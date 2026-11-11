@@ -1,0 +1,22 @@
+# Authentication: NEVER commit Garmin credentials or session tokens
+**/.env
+**/.env.*
+**/token.json
+**/*token*.json
+**/credentials*
+**/oauth*
+**/__pycache__/
+**/*.pyc
+# Runtime/server logs and private journal (public baseline is training-log-public.json)
+local/
+garmin/data/pull-log.txt
+garmin/data/diag-*.txt
+garmin/data/_samples/
+garmin/data/journal.json
+*.log
+# Local setup and worktree noise
+.DS_Store
+.vscode/
+.idea/
+venv/
+.venv/

@@ -1,0 +1,78 @@
+{
+  "available": true,
+  "lastPull": "2026-11-02T11:40:54",
+  "totalActivities": 126,
+  "weekly": {
+    "runs": 0,
+    "runKm": 0.0,
+    "gym": 0,
+    "ride": 0,
+    "other": 0
+  },
+  "recent": [
+    {
+      "date": "2026-10-31",
+      "name": "Recoaro Terme Escursionismo",
+      "sport": "other",
+      "km": 6.26,
+      "min": 110.6,
+      "hr": 95.0
+    },
+    {
+      "date": "2026-10-15",
+      "name": "Valdagno Corsa",
+      "sport": "run",
+      "km": 3.01,
+      "min": 16.5,
+      "hr": 144.0
+    },
+    {
+      "date": "2026-10-11",
+      "name": "Ciclismo indoor",
+      "sport": "ride",
+      "km": 0.0,
+      "min": 40.0,
+      "hr": 143.0
+    },
+    {
+      "date": "2026-10-08",
+      "name": "Corsa su tapis roulant",
+      "sport": "run",
+      "km": 7.0,
+      "min": 38.8,
+      "hr": 148.0
+    },
+    {
+      "date": "2026-10-07",
+      "name": "Corsa su tapis roulant",
+      "sport": "run",
+      "km": 7.01,
+      "min": 40.1,
+      "hr": 140.0
+    },
+    {
+      "date": "2026-10-06",
+      "name": "Padel",
+      "sport": "other",
+      "km": 0.6,
+      "min": 89.4,
+      "hr": 140.0
+    }
+  ],
+  "metrics": {
+    "rhr": {
+      "value": 53,
+      "date": "2026-10-25"
+    },
+    "sleep": {
+      "value": 8.0,
+      "date": "2026-10-26"
+    },
+    "hrv": {
+      "value": 62,
+      "date": "2026-10-25"
+    }
+  },
+  "dashboardBuilt": true,
+  "publishedAt": "2026-11-11T10:19:55+00:00"
+}

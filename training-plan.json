@@ -1,0 +1,288 @@
+{
+  "name": "Copenhagen 21K · Recovery to Race",
+  "race": {
+    "name": "Copenhagen Half Marathon",
+    "date": "2027-09-19",
+    "distanceKm": 21.0975,
+    "series": "SuperHalfs",
+    "target": "Completare la preparazione e arrivare alla gara con continuità; tempo da rivalutare dopo il recupero."
+  },
+  "startDate": "2026-11-09",
+  "confirmedWeeks": 8,
+  "coach": "Giovanni B.",
+  "status": "Trascrizione delle schede originali del 9 e 10 novembre 2026. Le sedute di mercoledì, giovedì e venerdì sono in attesa di foto.",
+  "phases": [
+    {
+      "name": "Riabilitazione + rientro sul tapis",
+      "start": "2026-11-09",
+      "end": "2027-01-03",
+      "confirmed": true,
+      "desc": "Otto settimane di progressione corsa/camminata e schede del trainer. Non accelerare senza confronto con il professionista."
+    },
+    {
+      "name": "Consolidamento aerobico",
+      "start": "2027-01-04",
+      "end": "2027-04-25",
+      "confirmed": false,
+      "desc": "Fase segnaposto: allenamenti e volumi da definire con l’istruttore in base alla caviglia."
+    },
+    {
+      "name": "Preparazione mezza maratona",
+      "start": "2027-04-26",
+      "end": "2027-08-22",
+      "confirmed": false,
+      "desc": "Fase segnaposto: non sono prescritte automaticamente ripetute, soglie o lunghi."
+    },
+    {
+      "name": "Rifinitura e gara",
+      "start": "2027-08-23",
+      "end": "2027-09-19",
+      "confirmed": false,
+      "desc": "Fase indicativa. Scarico finale da concordare sul piano aggiornato."
+    }
+  ],
+  "runProgression": [
+    {
+      "week": 1,
+      "sets": 6,
+      "run": 1,
+      "walk": 2
+    },
+    {
+      "week": 2,
+      "sets": 6,
+      "run": 2,
+      "walk": 2
+    },
+    {
+      "week": 3,
+      "sets": 4,
+      "run": 4,
+      "walk": 2
+    },
+    {
+      "week": 4,
+      "sets": 3,
+      "run": 6,
+      "walk": 2
+    },
+    {
+      "week": 5,
+      "sets": 2,
+      "run": 10,
+      "walk": 2
+    },
+    {
+      "week": 6,
+      "continuous": 20
+    },
+    {
+      "week": 7,
+      "continuous": 25
+    },
+    {
+      "week": 8,
+      "continuous": 30
+    }
+  ],
+  "schedule": {
+    "mon": {
+      "title": "Lower A · Forza + Rehab",
+      "kind": "gym",
+      "short": "Gambe · Caviglia · Core",
+      "confirmed": true,
+      "warmup": [
+        "Cyclette: 5 minuti, ritmo facile",
+        "Rilascio miofasciale con pallina / foam roller: fascia lata, quadricipite e polpaccio",
+        "Mobilità della caviglia in affondo con loop band",
+        "90/90 Hip attivo con rotazioni",
+        "Ponte glutei: 1 × 12",
+        "Camminata laterale con miniband: 2 × 10",
+        "Equilibrio monopodalico a terra: 2 × 20 secondi"
+      ],
+      "exercises": [
+        {
+          "id": "box-squat",
+          "name": "Box Squat Goblet",
+          "sets": "3 × 10–12",
+          "rest": "90 s",
+          "notes": "RPE 7–8. Controllare la direzione delle ginocchia."
+        },
+        {
+          "id": "leg-press",
+          "name": "Pressa monopodalica",
+          "sets": "3 × (12 destra + 8 sinistra)",
+          "rest": "Senza recupero tra le serie",
+          "notes": "Ripetizioni asimmetriche prescritte dal trainer. Tenere i carichi delle singole serie separati."
+        },
+        {
+          "id": "rdl-single",
+          "name": "RDL monopodalico con piede posteriore su panca",
+          "sets": "3 × 8–10",
+          "rest": "60 s",
+          "notes": "Punta del piede della gamba posteriore appoggiata sulla panca. Lavorare sull’allungamento."
+        },
+        {
+          "id": "hip-thrust",
+          "name": "Hip Thrust",
+          "sets": "Progressione dal blocco 6–8",
+          "rest": "120 s",
+          "notes": "Non eseguire nelle settimane 1–5. Settimana 6: introdurre secondo scheda. Settimana 7: variante a corpo libero; settimana 8: variante con manubrio. Da verificare i dettagli prima della settimana 6.",
+          "notBeforeWeek": 6
+        },
+        {
+          "id": "calf-bent",
+          "name": "Calf Raises a ginocchio flesso",
+          "sets": "2 × 10–15",
+          "rest": "90 s (coppia)",
+          "notes": "In combinazione con Tibialis Raises."
+        },
+        {
+          "id": "tibialis",
+          "name": "Tibialis Raises",
+          "sets": "2 × 15–20",
+          "rest": "90 s (coppia)",
+          "notes": "In combinazione con Calf Raises."
+        },
+        {
+          "id": "side-plank",
+          "name": "Side Plank",
+          "sets": "3 × 25–35 s",
+          "rest": "30 s",
+          "notes": "Controllo del tronco."
+        }
+      ],
+      "rehab": [
+        "Equilibrio su tappetino ripiegato: 3 × 30–40 s",
+        "Equilibrio su cuscini yoga + loop band: 3 × 30–40 s",
+        "Equilibrio: settimane 3–4 lanci pallina al muro; settimane 5–6 flessioni del busto; settimane 7–8 spinte in alto con loop band",
+        "90/90 Hip con loop band: 3 × 12 per lato; extrarotazione anca destra e intrarotazione anca sinistra, isometria 3 s",
+        "90/90 Hip Lift-Off: 3 × 5, anca sinistra in intrarotazione, isometria 5 s",
+        "Abduzione dell’anca da seduto con miniband"
+      ],
+      "cooldown": [
+        "Stretching flessori dell’anca su panca",
+        "Stretching gluteo da seduto",
+        "Adduttori alla parete",
+        "Piriforme da sdraiato"
+      ]
+    },
+    "tue": {
+      "title": "Upper A + Tapis roulant",
+      "kind": "run",
+      "short": "Parte alta · Corsa/camminata",
+      "confirmed": true,
+      "warmup": [
+        "Riscaldamento del lunedì (come indicato sulla scheda)",
+        "Gatto-mucca: 1 × 8",
+        "Rotazioni con loop band: 1 × 10"
+      ],
+      "exercises": [
+        {
+          "id": "db-bench",
+          "name": "Panca piana con manubri",
+          "sets": "Settimane 1–2: 3 × 8–10; 3–4: 4 × 6–8; 5–7: 5 × 4–5; 8: 4 × 6",
+          "rest": "90–120 s",
+          "notes": "RPE indicativi: 9 / 9–10 / 8–10 / 8–9 secondo progressione."
+        },
+        {
+          "id": "cable-row",
+          "name": "Rematore seduto su panca al cavo basso",
+          "sets": "4 × 12–15 per lato",
+          "rest": "90 s",
+          "notes": "Movimento controllato."
+        },
+        {
+          "id": "cable-fly",
+          "name": "Croci su panca piana al cavo basso",
+          "sets": "3 × 10–12",
+          "rest": "90–120 s",
+          "notes": "RPE 9–10. Carico da intendere per ciascun lato."
+        },
+        {
+          "id": "shoulder-multipower",
+          "name": "Lento avanti al multipower",
+          "sets": "Settimane 1–2: 4 × 6–8; 3–4: 3 × 8–10; 5–7: 3 × 10–12; 8: 3 × 6–8",
+          "rest": "120 s",
+          "notes": "Alternativa scritta: Shoulder Press prona. Eseguito al multipower nella prima settimana."
+        },
+        {
+          "id": "face-pull",
+          "name": "Face Pull con corda",
+          "sets": "3 × 10–12",
+          "rest": "90 s",
+          "notes": "RPE 9–10."
+        },
+        {
+          "id": "reverse-fly",
+          "name": "Reverse Fly con manubri",
+          "sets": "3 × 8–12",
+          "rest": "90 s",
+          "notes": "RPE 9–10."
+        },
+        {
+          "id": "pallof",
+          "name": "Pallof Press + rotazione con loop band e disco",
+          "sets": "2 × 10 per lato",
+          "rest": "60 s",
+          "notes": "Controllo antirotazionale."
+        }
+      ],
+      "cooldown": [
+        "5 minuti di camminata iniziale e finale del tapis compresi nella progressione",
+        "Stretching come venerdì (da integrare)",
+        "Arabic Pose",
+        "Cobra Stretch",
+        "Pettorale a gomito flesso"
+      ]
+    },
+    "wed": {
+      "title": "Mercoledì · Scheda da integrare",
+      "kind": "pending",
+      "short": "Foto dell’istruttore in arrivo",
+      "confirmed": false,
+      "warmup": [],
+      "exercises": [],
+      "cooldown": []
+    },
+    "thu": {
+      "title": "Giovedì · Scheda da integrare",
+      "kind": "pending",
+      "short": "Foto dell’istruttore in arrivo",
+      "confirmed": false,
+      "warmup": [],
+      "exercises": [],
+      "cooldown": []
+    },
+    "fri": {
+      "title": "Venerdì · Tapis + scheda da integrare",
+      "kind": "run",
+      "short": "Corsa sul tapis · altri esercizi da integrare",
+      "confirmed": false,
+      "warmup": [],
+      "exercises": [],
+      "cooldown": [],
+      "runningConfirmed": true
+    },
+    "sat": {
+      "title": "Weekend · Riposo / attivo",
+      "kind": "rest",
+      "short": "Riposo completo oppure camminata + mobilità",
+      "confirmed": true,
+      "warmup": [],
+      "exercises": [],
+      "cooldown": []
+    },
+    "sun": {
+      "title": "Weekend · Riposo / attivo",
+      "kind": "rest",
+      "short": "Riposo completo oppure camminata + mobilità",
+      "confirmed": true,
+      "warmup": [],
+      "exercises": [],
+      "cooldown": []
+    }
+  },
+  "weekendNote": "Nel weekend, un giorno è riposo completo e l’altro riposo attivo con camminata di 30–40 minuti e mobilità. L’ordine tra sabato e domenica è libero.",
+  "safety": "Il piano è la trascrizione delle prescrizioni dell’istruttore; non sostituisce indicazioni mediche o fisioterapiche. Dopo settimana 8, i carichi e i volumi restano da definire."
+}

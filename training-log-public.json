@@ -1,0 +1,64 @@
+{
+  "2026-11-09": {
+    "status": "partial",
+    "notes": "Prima settimana. Dati tratti dalle annotazioni sulla scheda; non si assume completamento di tutti gli esercizi.",
+    "exercises": {
+      "box-squat": {
+        "sets": "3 × 10–12 (prescrizione, rep effettive non annotate)",
+        "load": "15 kg",
+        "note": "Ripetizioni effettive da confermare"
+      },
+      "leg-press": {
+        "sets": "3 × (12 DX + 8 SX)",
+        "load": "60 kg / 60 kg / 50 kg",
+        "note": "Nessuna pausa tra le serie"
+      },
+      "rdl-single": {
+        "sets": "Serie prescritte: 3 × 8–10",
+        "load": "2 manubri da 7,5 kg",
+        "note": "Punta del piede posteriore sulla panca"
+      },
+      "hip-thrust": {
+        "sets": "Non eseguito",
+        "load": "",
+        "note": "Programma a partire dalla sesta settimana"
+      }
+    }
+  },
+  "2026-11-10": {
+    "status": "partial",
+    "notes": "Esercizi con dati annotati. Sessione tapis non ancora confermata come eseguita.",
+    "exercises": {
+      "db-bench": {
+        "sets": "3 × 8",
+        "load": "20 kg per manubrio",
+        "note": ""
+      },
+      "cable-row": {
+        "sets": "4 × 12",
+        "load": "10 kg",
+        "note": ""
+      },
+      "cable-fly": {
+        "sets": "3 × 10",
+        "load": "12 kg per lato",
+        "note": ""
+      },
+      "shoulder-multipower": {
+        "sets": "2 × 8 + 2 × 6",
+        "load": "10 kg per lato",
+        "note": "Lento avanti al multipower"
+      },
+      "face-pull": {
+        "sets": "3 × 10",
+        "load": "15 kg",
+        "note": ""
+      },
+      "reverse-fly": {
+        "sets": "3 × 10",
+        "load": "5 kg per manubrio",
+        "note": ""
+      }
+    }
+  }
+}

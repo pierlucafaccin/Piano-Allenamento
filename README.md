@@ -1,68 +1,52 @@
-# Lisbona 21K
+# Piano-Allenamento · Copenhagen 21K
 
-Piano di allenamento a test e diario corse verso la
-**EDP Lisbon Half Marathon del 7 marzo 2027**.
+Aggiornamento **della repository esistente** `pierlucafaccin/Piano-Allenamento` (ex LISBONA21K). Nessuna nuova repository. Obiettivo: **Copenhagen Half Marathon, 19 settembre 2027** (SuperHalfs).
 
-22 settimane in quattro fasi (base, qualità, specifica, taper), dal 5 ottobre 2026.
+## Contenuti
 
-## Come funziona
+- Web dashboard su **GitHub Pages**: `/Piano-Allenamento/`, con riepilogo, schede del lunedì e martedì, progressione tapis di 8 settimane, diario e analisi Garmin complete.
+- Le schede di mercoledì, giovedì e venerdì sono predisposte ma **non inventate**: per venerdì è confermata soltanto la seconda sessione sul tapis.
+- Il weekend alterna, senza ordine fisso, REST totale e REST attivo: 30–40 minuti di camminata e mobilità.
+- I dati Garmin originali, disponibili fino al **2 novembre 2026** nello ZIP fornito, sono inclusi come punto di partenza; non sono spacciati per aggiornati.
+- I dati Garmin, i grafici, sonno e HRV **sono pubblici** per tua scelta. Possono rivelare informazioni personali e abitudini di spostamento. **Credenziali e token non vanno mai pubblicati**, nemmeno in repository private.
 
-- **Oggi**: la seduta del giorno e il form per registrarla.
-- **Piano**: settimana per settimana.
-- **Andamento**: previsione per Lisbona, VDOT, soglia, VAM, grafici.
+## Installazione nella repository GIA' ESISTENTE
 
-### Le andature si ricalibrano dai test
+In PowerShell, dopo aver estratto lo ZIP (include `Aggiorna-Piano-Allenamento.ps1` e `repo-files/`):
 
-L'app usa le formule di Daniels–Gilbert. Il punto di partenza è la mezza della
-M6C (1:50:46, VDOT 40). Ogni volta che registri un test, si aggiornano da sole:
-
-| Test | Cosa inserisci | Cosa aggiorna |
-|---|---|---|
-| 5 km / 10 km a tutta | il tempo | VDOT, tutte le andature, previsione Lisbona |
-| 30' di soglia | FC media ultimi 20' | tutte le zone di FC |
-| VAM 7' | i metri percorsi | VAM e indice di resistenza (mezza / VAM) |
-| FC fissa sul tapis | ritmo medio a 145 bpm | grafico dell'efficienza aerobica |
-| Lungo con deriva | FC 1ª e 2ª metà | deriva cardiaca |
-
-Per i test conta la ripetibilità: stesso percorso (o pista), stesse scarpe,
-stesse condizioni.
-
-### Inserimento dei dati
-
-Ritmo e tempi si scrivono solo con le cifre: `535` diventa 5:35, `2230` diventa
-22:30, `14512` diventa 1:45:12. Per le sedute di soglia e VO2max inserisci ritmo
-e FC della parte centrale, non la media dell'uscita.
-
-I dati restano su questo dispositivo. Rotellina in alto a destra per esportarli,
-importarli o azzerarli. Il diario del blocco precedente resta salvato anche se
-non compare.
-
-## Deploy su GitHub Pages
-
-Sostituisci i file nel repo esistente e fai `git push`. Se parti da zero:
-
-```bash
-git init && git add . && git commit -m "Lisbona 21K"
-git branch -M main
-git remote add origin https://github.com/<tuo-utente>/<repo>.git
-git push -u origin main
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\Aggiorna-Piano-Allenamento.ps1
 ```
 
-Repo → *Settings* → *Pages* → Branch `main`, folder `/ (root)`.
+Lo script esegue un `git clone` in `C:\Siti\Piano-Allenamento` solo se la cartella non esiste, **non sovrascrive modifiche non salvate**, verifica che l'origin sia la repository corretta, aggiorna i soli file forniti, e mostra l'elenco prima di committare e pubblicare. Non usa `--force`.
 
-Su iPhone: Safari → *Condividi* → **Aggiungi a Home**. Se avevi già l'app
-installata col nome vecchio, rimuovila e aggiungila di nuovo per vedere il nome
-nuovo (i dati restano, sono legati al dominio).
+La vecchia dashboard Lisbona rimane nello storico Git dei commit precedenti; nessuna branch nuova. Se preferisci una copia consultabile, salva il vecchio `index.html` prima dell'aggiornamento.
 
-## File
+## Attivazione GitHub Pages
 
-| File | Ruolo |
-|---|---|
-| `index.html` | Tutta l'app, self-contained |
-| `sw.js` | Service worker: offline e aggiornamenti |
-| `manifest.webmanifest` | Nome, icone, modalità standalone |
-| `*.png` | Icone |
+Repository > Settings > Pages > Deploy from a branch > `main` / `(root)` > Save.
+Sito: `https://pierlucafaccin.github.io/Piano-Allenamento/` (potrebbero volerci alcuni minuti per il primo deploy).
 
----
+## Aggiornamento Garmin CLOUD completamente automatico
 
-Il piano è indicativo e non sostituisce il parere di un medico o fisioterapista.
+1. Repository > Settings > Secrets and variables > Actions > New repository secret.
+2. Nome **`GARMIN_PERSONAL_API_KEY`**. Incolla **solo il valore** già presente sul tuo PC nel file originale `garmin-dashboard/.env.local`. **Non** pubblicare mai l'intero `.env.local`, una password o il contenuto di `token.json`.
+3. Settings > Actions > General > Workflow permissions: assicurati che GitHub Actions possa scrivere i contenuti (Read and write permissions, se disponibile).
+4. Actions > `Aggiorna Garmin e dashboard` > Run workflow per il primo aggiornamento.
+
+Il job esegue `garmin/pull.py`, `garmin/build.py` e `tools/make_public.py`, poi committa gli output su `main`. È programmato **ogni giorno alle 05:30 UTC (06:30 inverno, 07:30 estate in Italia)**; gli orari dei job GitHub Actions non sono garantiti al minuto e GitHub può ritardarne o saltarne qualcuno. Un PC acceso non serve. L'accesso a Garmin dipende dalla validità della tua Personal API key.
+
+## Uso locale e diario
+
+- Per usare il server locale con salvataggio su file, `start.bat`; per aggiornare solo i dati, `refresh.bat`.
+- Online su GitHub Pages, le annotazioni del diario vengono salvate **nel browser via localStorage**. Le annotazioni iniziali del 9 e 10 novembre sono precaricate da `training-log-public.json`. Il bottone **Esporta diario** crea un JSON da conservare. Le modifiche browser **non si sincronizzano automaticamente tra PC e telefono** e non vengono committate su GitHub: questa è una possibile funzionalità futura.
+- Per pubblicare su GitHub gli aggiornamenti del diario già fatti nel browser, va aggiornato `training-log-public.json` con il JSON esportato e committato (i diversi browser manterranno una propria copia locale).
+- Se conservi il progetto completo nella vecchia cartella Garmin, il file `.env.local` resta sempre escluso da Git.
+
+### File di dati pubblicati
+
+`garmin/data/{activities,daily,hrv,profile,sleep,state,weight}.json`, `garmin/dashboard.html`, `garmin/summary.json`, `training-log-public.json`. Non verranno pubblicati `garmin/data/token.json`, `garmin/.env.local`, `_samples`, `local/` o altri file con credenziali.
+
+## Per ulteriori schede
+
+Modifica `training-plan.json > schedule.wed`, `schedule.thu` e `schedule.fri` quando arrivano le foto. Le fasi successive al blocco di riabilitazione sono segnaposti, non prescrizioni per gli allenamenti futuri.

@@ -1,7 +1,7 @@
 {
-  "name": "Lisbona 21K — Piano di allenamento",
-  "short_name": "Lisbona 21K",
-  "description": "Piano di allenamento a test verso la EDP Lisbon Half Marathon del 7 marzo 2027.",
+  "name": "Piano Allenamento · Copenaghen 2027",
+  "short_name": "Copenhagen 21K",
+  "description": "Schede palestra, recupero caviglia, dati Garmin e Copenhagen Half Marathon 2027.",
   "lang": "it",
   "start_url": "./index.html",
   "scope": "./",

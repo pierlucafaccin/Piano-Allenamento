@@ -1,0 +1,52 @@
+name: Aggiorna Garmin e dashboard
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 5 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: garmin-public-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      GARMIN_PERSONAL_API_KEY: ${{ secrets.GARMIN_PERSONAL_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verifica configurazione
+        shell: bash
+        run: |
+          if [ -z "$GARMIN_PERSONAL_API_KEY" ]; then
+            echo 'Secret GARMIN_PERSONAL_API_KEY mancante. Configuralo in Settings > Secrets and variables > Actions.' >&2
+            exit 1
+          fi
+      - name: Scarica nuovi dati Garmin
+        run: python garmin/pull.py
+      - name: Ricrea grafici e statistiche
+        run: |
+          python garmin/build.py
+          python tools/make_public.py
+      - name: Pubblica dati e dashboard sul branch main
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add garmin/data/activities.json garmin/data/daily.json garmin/data/hrv.json garmin/data/profile.json garmin/data/sleep.json garmin/data/state.json garmin/data/weight.json garmin/dashboard.html garmin/summary.json
+          if git diff --cached --quiet; then
+            echo 'Nessuna novita da pubblicare.'
+          else
+            git commit -m 'data: aggiorna attivita e metriche Garmin'
+            git push origin HEAD:main
+          fi
