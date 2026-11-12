@@ -9,6 +9,7 @@
   <link rel="manifest" href="./manifest.webmanifest">
   <title>Copenhagen 21K · Training Hub</title>
   <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./responsive-fixes.css?v=20261112">
   <script src="./app.js" defer></script>
 </head>
 <body>
@@ -20,11 +21,11 @@
     </a>
     <div class="sidebar-head">IL TUO PERCORSO</div>
     <nav class="primary-nav" aria-label="Navigazione principale">
-      <button type="button" class="navitem active" data-page="overview"><span class="nav-icon">◫</span> Panoramica</button>
-      <button type="button" class="navitem" data-page="week"><span class="nav-icon">▦</span> Settimana</button>
-      <button type="button" class="navitem" data-page="strength"><span class="nav-icon">⌁</span> Schede palestra</button>
-      <button type="button" class="navitem" data-page="garmin"><span class="nav-icon">◉</span> Garmin & dati</button>
-      <button type="button" class="navitem" data-page="roadmap"><span class="nav-icon">◇</span> Verso la gara</button>
+      <button type="button" class="navitem active" data-page="overview"><span class="nav-icon">◫</span><span class="nav-label">Panoramica</span></button>
+      <button type="button" class="navitem" data-page="week"><span class="nav-icon">▦</span><span class="nav-label">Settimana</span></button>
+      <button type="button" class="navitem" data-page="strength"><span class="nav-icon">⌁</span><span class="nav-label">Schede palestra</span></button>
+      <button type="button" class="navitem" data-page="garmin"><span class="nav-icon">◉</span><span class="nav-label">Garmin &amp; dati</span></button>
+      <button type="button" class="navitem" data-page="roadmap"><span class="nav-icon">◇</span><span class="nav-label">Verso la gara</span></button>
     </nav>
     <div class="sidebar-bottom">
       <div class="sidebar-status"><span class="pulse"></span><span><strong>Preparazione in corso</strong><small>Rientro progressivo alla corsa</small></span></div>
@@ -58,7 +59,15 @@
     </section>
     <section class="page" id="page-week">
       <div class="page-heading"><div><div class="eyebrow">PIANO SETTIMANALE</div><h1>Settimana di allenamento</h1><p>Solo gli allenamenti confermati dall'istruttore. Registra i risultati effettivi separatamente.</p></div></div>
-      <div class="panel"><div class="week-nav"><button class="btn btn-outline nav-arrow" id="week-prev" aria-label="Settimana precedente">‹</button><div><div id="week-label" class="week-label">Settimana 1</div><div id="week-range" class="subtle">—</div></div><div class="week-controls"><button class="btn btn-outline btn-sm" id="week-now">Questa settimana</button><button class="btn btn-outline btn-sm" id="backup-log" title="Esporta il tuo diario privato in formato JSON">Esporta diario</button><button class="btn btn-outline nav-arrow" id="week-next" aria-label="Settimana successiva">›</button></div></div><div id="week-note" class="notice"></div><div id="week-days" class="week-days"></div></div>
+      <div class="panel"><div class="week-nav">
+  <button class="btn btn-outline nav-arrow" id="week-prev" aria-label="Settimana precedente">‹</button>
+  <div class="week-summary"><div id="week-label" class="week-label">Settimana 1</div><div id="week-range" class="subtle">—</div></div>
+  <div class="week-controls">
+    <button class="btn btn-outline btn-sm" id="week-now">Questa settimana</button>
+    <button class="btn btn-outline btn-sm" id="backup-log" title="Esporta il tuo diario privato in formato JSON">Esporta diario</button>
+  </div>
+  <button class="btn btn-outline nav-arrow" id="week-next" aria-label="Settimana successiva">›</button>
+</div><div id="week-note" class="notice"></div><div id="week-days" class="week-days"></div></div>
       <div class="notice tip"><b>Weekend flessibile.</b> Un giorno REST totale, l'altro REST attivo: camminata di 30–40 minuti e mobilità. Non è ancora definito se sia sabato o domenica.</div>
     </section>
     <section class="page" id="page-strength">
