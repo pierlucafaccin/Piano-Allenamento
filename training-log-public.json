@@ -60,5 +60,37 @@
         "note": ""
       }
     }
+  },
+  "2026-11-11": {
+    "status": "partial",
+    "notes": "Annotazioni confermate per Curl e French Press; gli altri esercizi non vengono considerati automaticamente eseguiti.",
+    "exercises": {
+      "standing-db-curl": {
+        "sets": "3 × 10",
+        "load": "10 kg per manubrio",
+        "note": "Serie e ripetizioni confermate dall'atleta"
+      },
+      "french-press-db": {
+        "sets": "3 × 10",
+        "load": "7 kg per manubrio",
+        "note": "Serie e ripetizioni confermate dall'atleta"
+      }
+    }
+  },
+  "2026-11-12": {
+    "status": "partial",
+    "notes": "Carichi registrati per affondi e leg curl; altri esercizi non considerati automaticamente svolti.",
+    "exercises": {
+      "static-lunge-db": {
+        "sets": "3 × 8 per lato",
+        "load": "10 kg per manubrio",
+        "note": "Due manubri da 10 kg; registrato il 12/11/2026"
+      },
+      "lying-leg-curl-single": {
+        "sets": "3 × 10",
+        "load": "10 kg (macchina)",
+        "note": "Leg curl sdraiato monolaterale; registrato il 12/11/2026"
+      }
+    }
   }
 }

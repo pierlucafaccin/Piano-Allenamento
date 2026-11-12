@@ -10,7 +10,7 @@
   "startDate": "2026-11-09",
   "confirmedWeeks": 8,
   "coach": "Giovanni B.",
-  "status": "Trascrizione delle schede originali del 9 e 10 novembre 2026. Le sedute di mercoledì, giovedì e venerdì sono in attesa di foto.",
+  "status": "Schede LUN–GIO 9–12 novembre 2026: riscaldamento 90/90 completo, carichi di giovedì registrati, progressioni confermate. Venerdì da integrare.",
   "phases": [
     {
       "name": "Riabilitazione + rientro sul tapis",
@@ -96,6 +96,7 @@
         "Rilascio miofasciale con pallina / foam roller: fascia lata, quadricipite e polpaccio",
         "Mobilità della caviglia in affondo con loop band",
         "90/90 Hip attivo con rotazioni",
+        "90/90 Hip: rotazione + lift (sollevamento; ripetizioni non specificate)",
         "Ponte glutei: 1 × 12",
         "Camminata laterale con miniband: 2 × 10",
         "Equilibrio monopodalico a terra: 2 × 20 secondi"
@@ -175,7 +176,8 @@
       "warmup": [
         "Riscaldamento del lunedì (come indicato sulla scheda)",
         "Gatto-mucca: 1 × 8",
-        "Rotazioni con loop band: 1 × 10"
+        "Rotazioni con loop band: 1 × 10",
+        "Come lunedì: includere anche 90/90 Hip rotazione + lift (vedi riscaldamento LUN)"
       ],
       "exercises": [
         {
@@ -237,21 +239,173 @@
       ]
     },
     "wed": {
-      "title": "Mercoledì · Scheda da integrare",
-      "kind": "pending",
-      "short": "Foto dell’istruttore in arrivo",
-      "confirmed": false,
-      "warmup": [],
-      "exercises": [],
-      "cooldown": []
+      "title": "Upper B · Schiena, spalle + core",
+      "kind": "gym",
+      "short": "Lat machine · Spinte 45° · Rematore · Braccia · Core · Z2",
+      "confirmed": true,
+      "warmup": [
+        "Come lunedì: cyclette 5 min, mobilità caviglia e anca, attivazione glutei ed equilibrio monopodalico (vedi scheda LUN).",
+        "Come lunedì: includere anche 90/90 Hip rotazione + lift (vedi riscaldamento LUN)"
+      ],
+      "exercises": [
+        {
+          "id": "lat-neutral",
+          "name": "Lat Machine (presa neutra)",
+          "sets": "Sett. 1–2: 3 × 10–12 @RPE 8; sett. 3–4: 4 × 10–12 @RPE 9; sett. 5–7: 4 × 7–9 @RPE 9–10; sett. 8: 3 × 8 @RPE 8",
+          "rest": "120 s",
+          "notes": "Annotazione manoscritta: 1ª 10 × 60 kg; 2ª 10 × 50 kg; 3ª 10 × 50 kg. Risultati da confermare prima del salvataggio nel diario."
+        },
+        {
+          "id": "incline-db-press",
+          "name": "Spinte su panca a 45° con manubri",
+          "sets": "3 × 8–10 @RPE 9–10",
+          "rest": "90–120 s",
+          "notes": "Annotazione manoscritta: 10 + 10 + 8 ripetizioni con manubri da 15 kg ciascuno (da confermare)."
+        },
+        {
+          "id": "barbell-row-supine",
+          "name": "Rematore con bilanciere (presa supina)",
+          "sets": "Sett. 1–2: 3 × 8 @RPE 7; sett. 3–4: 4 × 8 @RPE 8; sett. 5–7: 4 × (8, 8, 6, 6) @RPE 9 [da confermare]; sett. 8: 3 × 10 @RPE 8",
+          "rest": "120 s",
+          "notes": "Annotazione: 3 × 8 con 12,5 kg per lato. Il peso del bilanciere non è specificato."
+        },
+        {
+          "id": "lateral-raises-incline",
+          "name": "Alzate laterali seduto su panca a 45°",
+          "sets": "3 × 10–12 @RPE 9–10",
+          "rest": "90 s",
+          "notes": "Annotazione: 3 × 12 con manubri da 4 kg ciascuno (da confermare)."
+        },
+        {
+          "id": "standing-db-curl",
+          "name": "Curl con manubri in piedi",
+          "sets": "Sett. 1: 3 × 10–12 @RPE 10; settimane successive: progressione da verificare",
+          "rest": "120 s (coppia)",
+          "notes": "Settimana 1 eseguita: 3 serie da 10 ripetizioni con 10 kg per manubrio. In abbinamento alla French Press; progressione delle settimane successive ancora da verificare."
+        },
+        {
+          "id": "french-press-db",
+          "name": "French Press con manubri su panca",
+          "sets": "Sett. 1: 3 × 10–12 @RPE 10; settimane successive: progressione da verificare",
+          "rest": "120 s (coppia)",
+          "notes": "Settimana 1 eseguita: 3 serie da 10 ripetizioni con 7 kg per manubrio. In abbinamento al Curl; progressione delle settimane successive ancora da verificare."
+        },
+        {
+          "id": "hollow-body",
+          "name": "Hollow Body",
+          "sets": "2 × 25–45 s",
+          "rest": "60 s",
+          "notes": "Mantenuta la durata come intervallo riportato."
+        },
+        {
+          "id": "ring-ab-roll",
+          "name": "Ring Ab Roll",
+          "sets": "3 × massimo",
+          "rest": "90 s",
+          "notes": "Ripetizioni massime per serie secondo controllo tecnico."
+        },
+        {
+          "id": "bike-zone2",
+          "name": "Cyclette — Zona 2 facile",
+          "sets": "20 min in Z2 (annotazione «1 + 20′» da chiarire)",
+          "rest": "—",
+          "notes": "Intensità EASY; non equivale alla sessione di corsa del tapis."
+        }
+      ],
+      "rehab": [
+        "Come lunedì (giorno 1): equilibrio e propriocezione, esercizi 90/90, abduzione anca da seduto, progressioni del trainer."
+      ],
+      "cooldown": [
+        "Arabic Pose laterale",
+        "Cobra Stretch",
+        "Lat Stretch alla spalliera"
+      ]
     },
     "thu": {
-      "title": "Giovedì · Scheda da integrare",
-      "kind": "pending",
-      "short": "Foto dell’istruttore in arrivo",
-      "confirmed": false,
-      "warmup": [],
-      "exercises": [],
+      "title": "Lower B · Forza, anca + stabilità",
+      "kind": "gym",
+      "short": "Affondi · Step Down · Leg Curl · Glutei · Tibiale · Progressione salti",
+      "confirmed": true,
+      "warmup": [
+        "Come lunedì: cyclette 5 min, mobilità caviglia e anca, attivazione glutei ed equilibrio monopodalico (vedi scheda LUN).",
+        "Come lunedì: includere anche 90/90 Hip rotazione + lift (vedi riscaldamento LUN)"
+      ],
+      "exercises": [
+        {
+          "id": "static-lunge-db",
+          "name": "Affondo statico con manubri",
+          "sets": "3 × 8 per lato",
+          "rest": "90 s",
+          "notes": "Carichi non annotati nella fotografia."
+        },
+        {
+          "id": "step-down",
+          "name": "Step Down",
+          "sets": "3 serie per lato. Sett. 1–3: 10 cm, 5/6/7 rip. (sett. 1/2/3); sett. 4–6: 15 cm, 4/5/6 rip.; sett. 7–8: 20 cm, 6/8 rip.",
+          "rest": "45–60 s",
+          "notes": "Progressione di altezza e ripetizioni confermata direttamente dall'atleta."
+        },
+        {
+          "id": "lying-leg-curl-single",
+          "name": "Leg Curl sdraiato monolaterale",
+          "sets": "3 × 10–15 @RPE 9",
+          "rest": "90 s",
+          "notes": "Un lato alla volta."
+        },
+        {
+          "id": "cable-hip-abd-band",
+          "name": "Abduzione al cavo basso + miniband",
+          "sets": "2 × Y secondi per lato; Y per le sett. 1–8: 30/35/40/35/45/50/45/60 s",
+          "rest": "90–120 s (coppia)",
+          "notes": "2 serie per lato, tenuta in secondi confermata: sett. 1=30, 2=35, 3=40, 4=35, 5=45, 6=50, 7=45, 8=60. In coppia con ponte glutei isometrico + rullata al muro."
+        },
+        {
+          "id": "bridge-iso-wall",
+          "name": "Ponte glutei isometrico + rullata al muro",
+          "sets": "2 × 12",
+          "rest": "90–120 s (coppia)",
+          "notes": "Esecuzione lenta e controllata, velocità costante. In abbinamento all’abduzione al cavo."
+        },
+        {
+          "id": "single-glute-bridge-band",
+          "name": "Ponte glutei monopodalico con miniband tra le ginocchia",
+          "sets": "2 × 6–10 @RPE 7",
+          "rest": "90 s (coppia)",
+          "notes": "Versione monopodalica; in abbinamento ai Tibialis Raises."
+        },
+        {
+          "id": "tibialis-raises-loop",
+          "name": "Tibialis Raises con loop band",
+          "sets": "2 × 15–20",
+          "rest": "90 s (coppia)",
+          "notes": "In abbinamento al ponte glutei monopodalico."
+        },
+        {
+          "id": "pogo-jump",
+          "name": "Pogo Jump",
+          "sets": "3 × 15",
+          "rest": "Non indicato",
+          "notes": "Solo dalla settimana 5 secondo scheda; non anticipare.",
+          "notBeforeWeek": 5
+        },
+        {
+          "id": "pogo-single-lateral",
+          "name": "Pogo Jump monopodalici + laterali",
+          "sets": "3 × (10 + 10)",
+          "rest": "Non indicato",
+          "notes": "Solo dalla settimana 6 secondo scheda; da chiarire se 10 + 10 sia per direzione/per lato.",
+          "notBeforeWeek": 6
+        },
+        {
+          "id": "skater-jumps-low",
+          "name": "Skater Jump bassi (tenuta 2 s)",
+          "sets": "3 × 8",
+          "rest": "Non indicato",
+          "notes": "Solo nelle settimane 7–8; tenuta 2 secondi.",
+          "notBeforeWeek": 7
+        }
+      ],
+      "rehab": [],
       "cooldown": []
     },
     "fri": {

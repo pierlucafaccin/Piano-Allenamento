@@ -5,7 +5,7 @@ Aggiornamento **della repository esistente** `pierlucafaccin/Piano-Allenamento` 
 ## Contenuti
 
 - Web dashboard su **GitHub Pages**: `/Piano-Allenamento/`, con riepilogo, schede del lunedì e martedì, progressione tapis di 8 settimane, diario e analisi Garmin complete.
-- Le schede di mercoledì, giovedì e venerdì sono predisposte ma **non inventate**: per venerdì è confermata soltanto la seconda sessione sul tapis.
+- Le schede di lunedì, martedì, mercoledì e giovedì sono trascritte; il venerdì resta da integrare, con la corsa sul tapis confermata.
 - Il weekend alterna, senza ordine fisso, REST totale e REST attivo: 30–40 minuti di camminata e mobilità.
 - I dati Garmin originali, disponibili fino al **2 novembre 2026** nello ZIP fornito, sono inclusi come punto di partenza; non sono spacciati per aggiornati.
 - I dati Garmin, i grafici, sonno e HRV **sono pubblici** per tua scelta. Possono rivelare informazioni personali e abitudini di spostamento. **Credenziali e token non vanno mai pubblicati**, nemmeno in repository private.
@@ -50,3 +50,7 @@ Il job esegue `garmin/pull.py`, `garmin/build.py` e `tools/make_public.py`, poi 
 ## Per ulteriori schede
 
 Modifica `training-plan.json > schedule.wed`, `schedule.thu` e `schedule.fri` quando arrivano le foto. Le fasi successive al blocco di riabilitazione sono segnaposti, non prescrizioni per gli allenamenti futuri.
+
+- Dettagli confermati: Curl in piedi 3 × 10 con 10 kg per manubrio; French Press 3 × 10 con 7 kg per manubrio. Step Down e abduzione al cavo seguono le progressioni confermate in `training-plan.json`.
+
+- Riscaldamento: il 90/90 Hip include **rotazione + lift** (oltre al 90/90 attivo). Giovedì 12/11: affondi statici 3 × 8 per lato con 10 kg per manubrio; leg curl monolaterale 3 × 10 a 10 kg.
