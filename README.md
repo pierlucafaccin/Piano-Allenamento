@@ -4,8 +4,8 @@ Aggiornamento **della repository esistente** `pierlucafaccin/Piano-Allenamento` 
 
 ## Contenuti
 
-- Web dashboard su **GitHub Pages**: `/Piano-Allenamento/`, con riepilogo, schede del lunedì e martedì, progressione tapis di 8 settimane, diario e analisi Garmin complete.
-- Le schede di lunedì, martedì, mercoledì e giovedì sono trascritte; il venerdì resta da integrare, con la corsa sul tapis confermata.
+- Web dashboard su **GitHub Pages**: `/Piano-Allenamento/`, con riepilogo, schede dal lunedì al venerdì, progressioni tapis distinte per martedì e venerdì, diario e analisi Garmin complete.
+- Le schede di lunedì, martedì, mercoledì, giovedì e venerdì sono trascritte. La corsa sul tapis segue due progressioni differenti per martedì e venerdì.
 - Il weekend alterna, senza ordine fisso, REST totale e REST attivo: 30–40 minuti di camminata e mobilità.
 - I dati Garmin originali, disponibili fino al **2 novembre 2026** nello ZIP fornito, sono inclusi come punto di partenza; non sono spacciati per aggiornati.
 - I dati Garmin, i grafici, sonno e HRV **sono pubblici** per tua scelta. Possono rivelare informazioni personali e abitudini di spostamento. **Credenziali e token non vanno mai pubblicati**, nemmeno in repository private.
@@ -54,3 +54,12 @@ Modifica `training-plan.json > schedule.wed`, `schedule.thu` e `schedule.fri` qu
 - Dettagli confermati: Curl in piedi 3 × 10 con 10 kg per manubrio; French Press 3 × 10 con 7 kg per manubrio. Step Down e abduzione al cavo seguono le progressioni confermate in `training-plan.json`.
 
 - Riscaldamento: il 90/90 Hip include **rotazione + lift** (oltre al 90/90 attivo). Giovedì 12/11: affondi statici 3 × 8 per lato con 10 kg per manubrio; leg curl monolaterale 3 × 10 a 10 kg.
+
+
+## Venerdi - Tapis + Core + Rehab
+
+La scheda del venerdi e stata integrata dalle fotografie del trainer.
+Il tapis del venerdi segue una progressione distinta da quello del martedi,
+definita in `runProgressionFriday` dentro `training-plan.json`.
+Copenhagen Plank solo dalla settimana 3. Nessuna esecuzione del venerdi
+e stata segnata automaticamente come svolta.

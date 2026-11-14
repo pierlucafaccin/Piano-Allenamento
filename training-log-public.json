@@ -92,5 +92,17 @@
         "note": "Leg curl sdraiato monolaterale; registrato il 12/11/2026"
       }
     }
+  },
+  "2026-11-13": {
+    "notes": "Seduta del venerdi svolta interamente con il personal trainer, secondo la scheda della prima settimana: tapis corsa/camminata, esercizi core, riabilitazione, stretching e defaticamento. Copenhagen Plank non previsto fino alla terza settimana. Ripetizioni effettive dei singoli esercizi e tempi non annotati separatamente.",
+    "exercises": {},
+    "status": "done"
+  },
+  "2026-11-14": {
+    "notes": "Riposo attivo svolto: circa 6 km di camminata, seguiti da mobilità e stretching. Durata, frequenza cardiaca e carichi non specificati.",
+    "exercises": {},
+    "status": "done",
+    "activityType": "active_rest",
+    "distanceKmApprox": 6
   }
 }

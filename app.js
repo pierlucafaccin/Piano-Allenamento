@@ -27,15 +27,23 @@
   function weekNumber(date) { return Math.floor(countDays(P.startDate,date)/7)+1; }
   function phaseWeek() { return weekNumber(TODAY); }
   function trainingWeek(i) { return i>=0 && i<P.confirmedWeeks; }
-  function runOfWeek(i) { return P.runProgression[i] || null; }
-  function runText(i) {
-    const s=runOfWeek(i);
-    if(!s) return 'Programma da concordare';
-    if(s.continuous) return s.continuous+' minuti di corsa continua';
-    return s.sets+' × ('+s.run+' min corsa + '+s.walk+' min camminata)';
+  function runOfWeek(i,day='tue') {
+    const series=day==='fri'?P.runProgressionFriday:P.runProgression;
+    return series?.[i] || null;
   }
-  function runMinutes(i) { const s=runOfWeek(i);return s ? (s.continuous || s.sets*s.run) : null; }
-  function runTotal(i) { const s=runOfWeek(i);return s ? 10 + (s.continuous || s.sets*(s.run+s.walk)) : null; }
+  function runDuration(min) {
+    if (Number.isInteger(min)) return min+' min';
+    const whole=Math.floor(min),secs=Math.round((min-whole)*60);
+    return (whole?whole+' min ':'')+secs+' s';
+  }
+  function runText(i,day='tue') {
+    const s=runOfWeek(i,day);
+    if(!s) return 'Programma da concordare';
+    if(s.continuous) return runDuration(s.continuous)+' di corsa continua';
+    return s.sets+' × ('+runDuration(s.run)+' corsa + '+runDuration(s.walk)+' camminata)';
+  }
+  function runMinutes(i,day='tue') { const s=runOfWeek(i,day);return s ? (s.continuous || s.sets*s.run) : null; }
+  function runTotal(i,day='tue') { const s=runOfWeek(i,day);return s ? 10 + (s.continuous || s.sets*(s.run+s.walk)) : null; }
   function dayDate(i,k) {return iso(offset(parse(P.startDate),i*7+KEYS.indexOf(k)));}
   function getDay(k,i) {
     let d=P.schedule[k];
@@ -87,16 +95,18 @@
     const r=(key==='tue'||key==='fri')&&inPlan;
     $('today-session').innerHTML=`<h3 class="today-title">${esc(d.title)}</h3><p class="today-sub">${esc(info)}</p>
     <div class="today-points">${eCount?`<span><b>${eCount}</b> esercizi principali</span>`:''}
-    ${r?`<span><b>${esc(runText(idx))}</b></span>`:''}
+    ${r?`<span><b>${esc(runText(idx,key))}</b></span>`:''}
     ${d.kind==='rest'?'<span>Un giorno riposo completo, uno attivo</span>':''}
     ${!d.confirmed?'<span>Dettagli da confermare</span>':''}</div>
     <div class="btn-row"><button type="button" class="btn btn-mint" data-open="${esc(date)}">Apri e registra la seduta</button>${statusTag(date)}</div>`;
     const step=idx>=0&&idx<8?idx:-1;
     $('run-progress-label').textContent=step>=0?`SETT. ${step+1} / 8`:'PIANO 8 SETTIMANE';
-    $('run-progress').innerHTML=`<div class="run-line"><div><strong>${step>=0?esc(runText(step)):'Progressione completata / in attesa'}</strong>
-      <small>Martedì e venerdì · 5' cammino iniziali e finali</small></div></div>
+    $('run-progress').innerHTML=`<div class="run-line"><div>
+      <strong>Martedì: ${step>=0?esc(runText(step,'tue')):'Da pianificare'}</strong><br>
+      <strong>Venerdì: ${step>=0?esc(runText(step,'fri')):'Da pianificare'}</strong>
+      <small>Entrambi i giorni: 5' cammino iniziali e finali.</small></div></div>
       <div class="run-steps">${Array.from({length:8},(_,j)=>`<span title="Settimana ${j+1}" class="${step>j?'completed':step===j?'current':''}"></span>`).join('')}</div>
-      <div class="run-line"><div class="subtle small">Minuti effettivi di corsa per seduta</div><strong>${step>=0?runMinutes(step)+' min':'—'}</strong></div>
+      <div class="run-line"><div class="subtle small">Minuti di corsa (mar / ven)</div><strong>${step>=0?runMinutes(step)+' / '+runMinutes(step,'fri')+' min':'—'}</strong></div>
       <div class="progress-line"><span style="width:${step>=0?((step+1)/8)*100:0}%"></span></div>
       <p class="muted-p" style="margin-bottom:0">Il tapis è parte della riabilitazione, non un allenamento di qualità a ritmo gara. La progressione segue la prescrizione originale.</p>`;
     const currentIdx=Math.max(0,Math.min(idx,P.confirmedWeeks-1));
@@ -115,14 +125,14 @@
     $('week-prev').disabled=week<=0;
     $('week-next').disabled=countDays(w0,P.race.date)<0;
     $('week-note').innerHTML=trainingWeek(week)
-     ? `<strong>Settimana ${wi}.</strong> ${esc(runText(week))} sul tapis martedì e venerdì. Gli altri giorni seguono solo le schede disponibili.`
+     ? `<strong>Settimana ${wi}.</strong> Martedì: ${esc(runText(week,'tue'))}. Venerdì: ${esc(runText(week,'fri'))}. Gli altri giorni seguono solo le schede disponibili.`
      : '<strong>Programma futuro non ancora definito.</strong> Non vengono riproposti automaticamente i carichi del primo blocco, né prescritte corse aggiuntive.';
     $('week-days').innerHTML=KEYS.map(k=>{
       const x=dayCard(k,week),d=x.data,z=x.date;
       const status=statusOf(z);
       return `<button type="button" class="week-day" data-open="${z}">
          <div class="wd-date"><small>${DOW[KEYS.indexOf(k)]}</small><strong>${parse(z).getDate()}</strong></div>
-         <span class="wd-stripe ${esc(d.kind)}"></span><div class="wd-info"><b>${esc(d.title)}</b><small>${esc(x.run?runText(week):d.short)}</small></div>
+         <span class="wd-stripe ${esc(d.kind)}"></span><div class="wd-info"><b>${esc(d.title)}</b><small>${esc(x.run?runText(week,k):d.short)}</small></div>
          <span class="wd-mark ${esc(status)}">${status==='done'?'✓ FATTO':status==='partial'?'● ANNOTATO':status==='skipped'?'NON SVOLTO':d.confirmed?'VEDI SCHEDA':'DA INTEGRARE'}</span>
         </button>`;
     }).join('');
@@ -144,12 +154,12 @@
     if(!d.confirmed){
       head+=`<div class="panel blank-state"><div class="blank-icon">＋</div><strong>${strengthTab==='fri'?'Tapis confermato, altri esercizi in arrivo':'Scheda da aggiungere'}</strong>
         <p>Questo spazio è predisposto per la fotografia del ${esc(DOW[KEYS.indexOf(strengthTab)])}. Non sono stati inventati esercizi né carichi.</p>
-        ${strengthTab==='fri'?`<div class="notice">Corsa: ${esc(runText(wIndex))}, con 5 minuti di cammino all'inizio e alla fine.</div>`:''}</div>`;
+        ${strengthTab==='fri'?`<div class="notice">Corsa: ${esc(runText(wIndex,'fri'))}, con 5 minuti di cammino all'inizio e alla fine.</div>`:''}</div>`;
     }else{
       const exercises=d.exercises||[];
       head+=`<div class="detail-layout"><article class="panel"><h3>Esercizi principali</h3><div class="run-table"><table class="exercise-table"><thead><tr><th>Esercizio e note</th><th>Serie / ripetizioni</th><th>Recupero</th></tr></thead><tbody>${exercises.map(e=>trainingItem(e,date,wIndex+1)).join('')}</tbody></table></div></article>
        <div class="stack">${listPanel('Riscaldamento',d.warmup)}${listPanel('Rehab / propriocezione',d.rehab)}
-       ${strengthTab==='tue'?`<article class="panel"><h3>Corsa sul tapis</h3><p class="muted-p">${esc(runText(wIndex))} · Totale seduta ${runTotal(wIndex)} min, con 5 min di camminata iniziale e finale.</p></article>`:''}
+       ${(strengthTab==='tue'||strengthTab==='fri')?`<article class="panel"><h3>Corsa sul tapis</h3><p class="muted-p">${esc(runText(wIndex,strengthTab))} · Totale seduta ${runTotal(wIndex,strengthTab)} min, con 5 min di camminata iniziale e finale. Previsto, non automaticamente eseguito.</p></article>`:''}
        ${listPanel('Defaticamento e stretching',d.cooldown)}</div></div>`;
     }
     $('strength-detail').innerHTML=head;
@@ -192,7 +202,7 @@
     $('phases-list').innerHTML=P.phases.map((p,i)=>`<div class="phase-item ${TODAY>=p.start&&TODAY<=p.end?'active':''}"><div class="phase-index">${i+1}</div>
       <div><h3>${esc(p.name)} <span class="tag ${p.confirmed?'tag-mint':'tag-amber'}">${p.confirmed?'CONFERMATA':'DA DEFINIRE'}</span></h3><p>${esc(p.desc)}</p></div>
       <div class="phase-dates">${datelabel(p.start,false)} — ${datelabel(p.end)}</div></div>`).join('');
-    $('run-table').innerHTML=`<div class="run-table"><table><thead><tr><th>Settimana</th><th>Sessione (mar + ven)</th><th>Corsa effettiva</th><th>Durata complessiva</th></tr></thead><tbody>${P.runProgression.map((r,i)=>`<tr class="${wi===i+1?'current':''}"><td><strong>${i+1}</strong></td><td>${esc(runText(i))}</td><td>${runMinutes(i)} min</td><td>${runTotal(i)} min</td></tr>`).join('')}</tbody></table></div><p class="subtle small">Durata totale comprensiva di 5' di camminata di riscaldamento + 5' di defaticamento. Nelle prime cinque settimane include anche le pause camminate tra le ripetizioni.</p>`;
+    $('run-table').innerHTML=`<div class="run-table"><table><thead><tr><th>Sett.</th><th>Martedì</th><th>Venerdì</th><th>Min corsa (M/V)</th><th>Totale (M/V)</th></tr></thead><tbody>${P.runProgression.map((r,i)=>`<tr class="${wi===i+1?'current':''}"><td><strong>${i+1}</strong></td><td>${esc(runText(i,'tue'))}</td><td>${esc(runText(i,'fri'))}</td><td>${runMinutes(i)} / ${runMinutes(i,'fri')} min</td><td>${runTotal(i)} / ${runTotal(i,'fri')} min</td></tr>`).join('')}</tbody></table></div><p class="subtle small">I due giorni hanno progressioni differenti. Durate comprensive di 5 minuti di camminata iniziale e finale, più le pause previste.</p>`;
   }
   function openDrawer(date) {
     const idx=weekNumber(date)-1, dow=(parse(date).getDay()+6)%7;
@@ -202,7 +212,7 @@
     const log=LOGS[date]||{status:'partial',notes:'',exercises:{}};
     $('drawer-content').innerHTML=`
       <div class="drawer-quick"><strong>Piano:</strong> ${esc(d.short)}<br>${!d.confirmed?'Dettaglio della scheda non ancora ricevuto. Puoi comunque lasciare una nota.':''}
-      ${(k==='tue'||k==='fri')&&trainingWeek(idx)?`<br><strong>Tapis:</strong> ${esc(runText(idx))} · ${runTotal(idx)} minuti totali (previsti, non automaticamente svolti).`:''}</div>
+      ${(k==='tue'||k==='fri')&&trainingWeek(idx)?`<br><strong>Tapis:</strong> ${esc(runText(idx,k))} · ${runTotal(idx,k)} minuti totali (previsti, non automaticamente svolti).`:''}</div>
       <form id="log-form" data-date="${date}">
         <div class="field"><label for="session-status">Stato della sessione</label><select id="session-status" name="status">
           <option value="partial" ${log.status==='partial'?'selected':''}>Annotazioni parziali / da completare</option>

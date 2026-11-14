@@ -10,7 +10,7 @@
   "startDate": "2026-11-09",
   "confirmedWeeks": 8,
   "coach": "Giovanni B.",
-  "status": "Schede LUN–GIO 9–12 novembre 2026: riscaldamento 90/90 completo, carichi di giovedì registrati, progressioni confermate. Venerdì da integrare.",
+  "status": "Cinque schede settimanali trascritte dalle foto del trainer, con progressione tapis specifica per martedi e venerdi. I carichi eseguiti restano nel diario separato.",
   "phases": [
     {
       "name": "Riabilitazione + rientro sul tapis",
@@ -409,14 +409,56 @@
       "cooldown": []
     },
     "fri": {
-      "title": "Venerdì · Tapis + scheda da integrare",
+      "title": "Venerdì - Tapis + Core + Rehab",
       "kind": "run",
-      "short": "Corsa sul tapis · altri esercizi da integrare",
-      "confirmed": false,
-      "warmup": [],
-      "exercises": [],
-      "cooldown": [],
-      "runningConfirmed": true
+      "short": "Tapis · Core · Riabilitazione caviglia",
+      "confirmed": true,
+      "runningConfirmed": true,
+      "warmup": [
+        "90/90 Hip attivo",
+        "Gatto-mucca",
+        "Calf Raises al muro (richiamo di stretching)",
+        "Mobilita della caviglia con loop band in affondo",
+        "Tapis: 5 minuti di camminata di riscaldamento"
+      ],
+      "exercises": [
+        {
+          "id": "fri-side-plank-star",
+          "name": "Side Plank Star dinamico (gamba superiore sollevata)",
+          "sets": "3 x 25-60 s per lato",
+          "rest": "60 s",
+          "notes": "Gamba superiore sollevata, versione dinamica secondo la scheda."
+        },
+        {
+          "id": "fri-bird-dog",
+          "name": "Bird Dog",
+          "sets": "2 x 10 per lato",
+          "rest": "30 s",
+          "notes": "Esercizio di controllo del tronco."
+        },
+        {
+          "id": "fri-copenhagen-plank",
+          "name": "Copenhagen Plank",
+          "sets": "3 x 25-60 s per lato",
+          "rest": "60 s",
+          "notes": "Introdurre solo dalla settimana 3, come annotato sulla scheda.",
+          "notBeforeWeek": 3
+        }
+      ],
+      "rehab": [
+        "Routine riabilitativa del lunedi (come giorno 1), secondo le prescrizioni gia trascritte."
+      ],
+      "cooldown": [
+        "Tapis: 5 minuti di camminata di defaticamento",
+        "Calf Stretch in piedi al muro",
+        "Calf-Hamstring Stretch su box",
+        "Flexor Stretch su panca",
+        "TFL Stretch seduto + sdraiato con gambe incrociate",
+        "Glute Stretch (piriforme da sdraiato)",
+        "90/90 statico attivo",
+        "Mobilita caviglia-ginocchio al muro",
+        "Respirazione diaframmatica con cuscinetto propriocettivo sotto le scapole"
+      ]
     },
     "sat": {
       "title": "Weekend · Riposo / attivo",
@@ -438,5 +480,50 @@
     }
   },
   "weekendNote": "Nel weekend, un giorno è riposo completo e l’altro riposo attivo con camminata di 30–40 minuti e mobilità. L’ordine tra sabato e domenica è libero.",
-  "safety": "Il piano è la trascrizione delle prescrizioni dell’istruttore; non sostituisce indicazioni mediche o fisioterapiche. Dopo settimana 8, i carichi e i volumi restano da definire."
+  "safety": "Il piano è la trascrizione delle prescrizioni dell’istruttore; non sostituisce indicazioni mediche o fisioterapiche. Dopo settimana 8, i carichi e i volumi restano da definire.",
+  "runProgressionFriday": [
+    {
+      "week": 1,
+      "sets": 6,
+      "run": 1,
+      "walk": 2
+    },
+    {
+      "week": 2,
+      "sets": 6,
+      "run": 2,
+      "walk": 1.5
+    },
+    {
+      "week": 3,
+      "sets": 4,
+      "run": 4,
+      "walk": 1.5
+    },
+    {
+      "week": 4,
+      "sets": 3,
+      "run": 7,
+      "walk": 2
+    },
+    {
+      "week": 5,
+      "sets": 2,
+      "run": 10,
+      "walk": 1.5
+    },
+    {
+      "week": 6,
+      "continuous": 22
+    },
+    {
+      "week": 7,
+      "continuous": 25
+    },
+    {
+      "week": 8,
+      "continuous": 30
+    }
+  ],
+  "runProgressionNote": "Two different prescribed treadmill progressions. runProgression is Tuesday; runProgressionFriday is Friday. All sessions include 5 min warm-up walk and 5 min cool-down walk."
 }
