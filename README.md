@@ -63,3 +63,18 @@ Il tapis del venerdi segue una progressione distinta da quello del martedi,
 definita in `runProgressionFriday` dentro `training-plan.json`.
 Copenhagen Plank solo dalla settimana 3. Nessuna esecuzione del venerdi
 e stata segnata automaticamente come svolta.
+
+## Modalità allenamento (coach)
+
+Dalla panoramica (**Inizia allenamento**) o dal diario (**Allenati in modalità guidata**) si apre una schermata a tutto schermo che accompagna la seduta:
+
+- check-in caviglia (0–10) all'inizio e alla fine, con avviso se il fastidio sale di 2 punti;
+- checklist di riscaldamento, riabilitazione e defaticamento;
+- contaserie con ripetizioni, kg e RPE precompilati dall'ultima volta e suggerimento prudente di carico;
+- recupero automatico a tutto schermo dopo ogni serie (±15 s, beep, vibrazione, voce);
+- superserie: gli esercizi marcati "(coppia)" si alternano e il recupero arriva dopo il secondo;
+- timer per le tenute (anche per lato, con cambio lato guidato);
+- intervalli corsa/camminata del tapis con avvisi vocali di cambio fase;
+- riepilogo e salvataggio nel diario nello stesso formato di `progressi.js`.
+
+La seduta in corso è salvata nel browser e si può riprendere dopo un ricaricamento. Il service worker conserva una copia dell'app per l'uso offline.

@@ -98,7 +98,7 @@
     ${r?`<span><b>${esc(runText(idx,key))}</b></span>`:''}
     ${d.kind==='rest'?'<span>Un giorno riposo completo, uno attivo</span>':''}
     ${!d.confirmed?'<span>Dettagli da confermare</span>':''}</div>
-    <div class="btn-row"><button type="button" class="btn btn-mint" data-open="${esc(date)}">Apri e registra la seduta</button>${statusTag(date)}</div>`;
+    <div class="btn-row">${inPlan?`<button type="button" class="btn btn-coach" data-coach-start="${esc(date)}">${d.kind==='rest'?'Avvia riposo attivo':'Inizia allenamento'}</button>`:''}<button type="button" class="btn btn-outline" data-open="${esc(date)}">Registra a mano</button>${statusTag(date)}</div>`;
     const step=idx>=0&&idx<8?idx:-1;
     $('run-progress-label').textContent=step>=0?`SETT. ${step+1} / 8`:'PIANO 8 SETTIMANE';
     $('run-progress').innerHTML=`<div class="run-line"><div>
@@ -316,6 +316,7 @@
     document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.page)));
     document.body.addEventListener('click',e=>{
       const go=e.target.closest('[data-go]');if(go){navigate(go.dataset.go);return;}
+      const coach=e.target.closest('[data-coach-start]');if(coach){window.WorkoutCoach?.start(coach.dataset.coachStart);return;}
       const day=e.target.closest('[data-open]');if(day){openDrawer(day.dataset.open);return;}
       const tab=e.target.closest('[data-strength]');if(tab){strengthTab=tab.dataset.strength;renderStrength();return;}
     });
@@ -334,7 +335,7 @@
     $('top-sync').onclick=startSync;$('garmin-sync').onclick=startSync;
     $('drawer-close').onclick=closeDrawer;$('drawer-backdrop').onclick=closeDrawer;
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
-    window.TrainingTracker?.mount({
+    const trackerApi = {
       getPlan: () => P,
       getLogs: () => LOGS,
       save: async (date, entry) => {
@@ -366,7 +367,9 @@
         }
         renderAll();
       }
-    });
+    };
+    window.TrainingTracker?.mount(trackerApi);
+    window.WorkoutCoach?.mount(trackerApi);
     renderAll();
     const anchor=location.hash.slice(1);if(['overview','week','strength','garmin','roadmap'].includes(anchor))navigate(anchor);
     refreshTicker=setInterval(loadStatus,12000);

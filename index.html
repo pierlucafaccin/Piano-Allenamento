@@ -10,9 +10,11 @@
   <title>Copenhagen 21K · Training Hub</title>
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./responsive-fixes.css?v=20261112">
-  <script src="./progressi.js?v=2" defer></script>
+  <script src="./progressi.js?v=3" defer></script>
+  <script src="./coach.js?v=1" defer></script>
   <script src="./app.js" defer></script>
   <link rel="stylesheet" href="./progressi.css?v=2">
+  <link rel="stylesheet" href="./coach.css?v=1">
 </head>
 <body>
 <div class="shell">
@@ -106,6 +108,7 @@
   <div class="drawer-header"><div><div class="eyebrow" id="drawer-date">—</div><h2 id="drawer-heading">Registra seduta</h2></div><button type="button" id="drawer-close" class="btn btn-outline icon-close" aria-label="Chiudi">×</button></div>
   <div id="drawer-content"></div>
 </aside>
+<div id="coach-root" hidden></div>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}</script>
 </body>
 </html>

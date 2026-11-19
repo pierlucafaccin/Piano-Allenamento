@@ -1,0 +1,147 @@
+/* Copenhagen 21K — Modalità allenamento.
+ * Pensata per essere letta a un metro di distanza con le mani sudate:
+ * target da 56px in su, numeri enormi, un solo colore che dice "corri" o "recupera". */
+body.coach-open{overflow:hidden}
+#coach-root[hidden]{display:none}
+.coach{position:fixed;inset:0;z-index:300;background:var(--bg);display:flex;flex-direction:column;color:var(--text);
+  padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+.coach-top{display:grid;grid-template-columns:52px 1fr 52px;align-items:center;gap:8px;padding:10px 12px 6px}
+.coach-top-mid{text-align:center;min-width:0}
+.coach-top-mid b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.coach-top-mid span{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.coach-icon{width:48px;height:48px;border-radius:14px;border:1px solid var(--line2);background:var(--surface);color:var(--text);font-size:18px}
+.coach-icon.on{border-color:#38786c}
+.coach-rail{display:flex;gap:4px;padding:4px 16px 10px}
+.coach-rail button{flex:1;height:6px;border:0;border-radius:3px;background:var(--line);padding:0;position:relative}
+.coach-rail button::after{content:"";position:absolute;inset:-10px 0}
+.coach-rail button.done{background:#3d8f80}
+.coach-rail button.now{background:var(--amber)}
+.coach-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:4px 16px 28px}
+.coach-card{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.coach-h{font-size:clamp(26px,7vw,36px);line-height:1.1;letter-spacing:-.04em;margin:6px 0 0}
+.coach-sub{color:var(--muted);font-size:14px;margin:0}
+.coach-q{font-size:17px;margin:10px 0 0;letter-spacing:-.02em}
+.coach-hint{color:var(--muted);font-size:13px;margin:0;line-height:1.55}
+.coach-say{margin:0;padding:12px 14px;border-left:3px solid var(--mint);background:#16302e;border-radius:0 12px 12px 0;font-size:14px;line-height:1.5;color:#d6f5ee}
+.coach-pair{margin:6px 0 0;font-size:13px;color:var(--blue)}
+.coach-warn{margin:0 auto;max-width:560px;font-size:12px;color:var(--amber);padding:0 16px}
+.coach-card .coach-warn{padding:0}
+.coach-alert{margin:0;padding:12px 14px;border:1px solid #6b4140;background:#3a2224;border-radius:12px;color:#ffd9d3;font-size:13px;line-height:1.5}
+
+/* Bottone principale: il pollice deve trovarlo senza guardare */
+.coach-go{width:100%;min-height:68px;border:0;border-radius:18px;background:var(--mint);color:#082322;font-size:19px;font-weight:800;letter-spacing:-.01em}
+.coach-go:disabled{opacity:.35}
+.coach-go.alt{background:var(--surface2);color:var(--text);border:1px solid var(--line2)}
+.coach-go:active{transform:scale(.985)}
+.coach-manual{align-self:center}
+.coach-nav{display:flex;justify-content:space-between;gap:10px;margin-top:6px}
+.coach-nav .btn{min-height:48px;flex:1}
+.coach-row{display:flex;gap:8px;flex-wrap:wrap}
+.coach-row.center{justify-content:center}
+.coach-row .btn{min-height:44px}
+
+/* Scale 0–10 */
+.coach-scale{display:grid;grid-template-columns:repeat(auto-fit,minmax(40px,1fr));gap:6px}
+.coach-scale button{min-height:50px;border-radius:12px;border:1px solid var(--line2);background:var(--surface);color:var(--text);font-size:16px;font-weight:700}
+.coach-scale button.on{background:var(--mint);color:#082322;border-color:var(--mint)}
+.coach-scale button.mid.on{background:var(--amber);border-color:var(--amber)}
+.coach-scale button.hi.on{background:var(--red);border-color:var(--red)}
+
+/* Checklist */
+.coach-checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.coach-checks button{width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;min-height:56px;padding:14px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--text);font-size:15px;line-height:1.4}
+.coach-tick{flex:none;width:24px;height:24px;border-radius:8px;border:2px solid var(--line2);margin-top:-1px}
+.coach-checks button.on{background:#14302b;border-color:#2f6b5e;color:#b9dcd3}
+.coach-checks button.on .coach-tick{background:var(--mint);border-color:var(--mint);box-shadow:inset 0 0 0 4px #14302b}
+
+/* Esercizio */
+.coach-setno{font-size:15px;color:var(--muted)}
+.coach-setno b{font-size:22px;color:var(--text);font-variant-numeric:tabular-nums}
+.coach-steppers{display:grid;gap:10px}
+.coach-stepper{display:flex;flex-direction:column;gap:6px}
+.coach-stepper-label{font-size:12px;color:var(--muted);font-weight:650}
+.coach-stepper>div{display:grid;grid-template-columns:68px 1fr 68px;gap:8px}
+.coach-stepper button{min-height:72px;border-radius:16px;border:1px solid var(--line2);background:var(--surface2);color:var(--text);font-size:30px;font-weight:500}
+.coach-stepper button:active{background:#22384b}
+.coach-stepper input{min-width:0;text-align:center;border-radius:16px;border:1px solid var(--line);background:var(--surface);color:var(--text);
+  font-size:44px;font-weight:800;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.coach-rpe{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.coach-rpe .coach-stepper-label{grid-column:1/-1}
+.coach-rpe button{min-height:48px;border-radius:12px;border:1px solid var(--line2);background:var(--surface);color:var(--text);font-weight:700;font-size:16px}
+.coach-rpe button.on{background:var(--blue);color:#0b1a2a;border-color:var(--blue)}
+.coach-done-sets{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.coach-done-sets li{display:grid;grid-template-columns:26px auto 1fr auto 40px;gap:10px;align-items:center;padding:8px 10px;border-radius:12px;background:var(--surface);border:1px solid var(--line);font-variant-numeric:tabular-nums}
+.coach-done-sets li>span{color:var(--dim);font-size:12px}
+.coach-done-sets b{font-size:17px}
+.coach-done-sets em{font-style:normal;color:var(--mint)}
+.coach-done-sets small{color:var(--muted)}
+.coach-done-sets button{height:36px;border-radius:10px;border:1px solid var(--line2);background:transparent;color:var(--muted)}
+.coach-complete{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px;border-radius:14px;background:#14302b;border:1px solid #2f6b5e}
+.coach-more{border-top:1px solid var(--line);padding-top:10px}
+.coach-more summary{cursor:pointer;color:var(--muted);font-size:13px;min-height:36px;display:flex;align-items:center}
+.coach-more[open]{display:flex;flex-direction:column;gap:10px}
+.coach-units{display:flex;flex-wrap:wrap;gap:6px}
+.coach-units button{min-height:40px;padding:0 12px;border-radius:10px;border:1px solid var(--line2);background:var(--surface);color:var(--muted);font-size:13px}
+.coach-units button.on{color:var(--mint);border-color:#38786c}
+.coach-label{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--muted);font-weight:650}
+.coach-label input,.coach-label textarea{background:var(--surface);color:var(--text);border:1px solid var(--line2);border-radius:12px;padding:12px;font-size:16px}
+.coach-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end}
+.coach-toggle{min-height:48px;border-radius:12px;border:1px solid var(--line2);background:var(--surface);color:var(--text);font-weight:650}
+.coach-toggle.on{background:#14302b;border-color:#2f6b5e;color:var(--mint)}
+
+/* Tenute a tempo */
+.coach-hold{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 0}
+.coach-hold-side{font-size:15px;color:var(--muted)}
+.coach-hold-num{font-size:clamp(88px,30vw,150px);font-weight:800;letter-spacing:-.06em;line-height:1;font-variant-numeric:tabular-nums}
+
+/* Recupero: lo schermo intero è una vasca che si svuota */
+.coach-rest{position:absolute;inset:0;z-index:5;background:#0a1620;overflow:hidden}
+.coach-rest-fill{position:absolute;inset:0;background:linear-gradient(#2c6d62,#1f4c46);transform-origin:bottom;transition:transform .25s linear}
+.coach-rest-fill::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--mint)}
+.coach-rest-fill.late{background:linear-gradient(#7a5d2c,#4d3b1e)}
+.coach-rest-fill.late::before{background:var(--amber)}
+.coach-rest-inner{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;text-align:center}
+.coach-rest-label{font-size:16px;color:#cfe6e0}
+.coach-rest-num{font-size:clamp(110px,38vw,200px);font-weight:800;letter-spacing:-.07em;line-height:.95;font-variant-numeric:tabular-nums;text-shadow:0 2px 24px #0006}
+.coach-rest-next{font-size:16px;color:#e4f2ee;margin:0;max-width:22em}
+.coach-rest-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:min(420px,100%);margin-top:18px}
+.coach-rest-actions button{min-height:58px;border-radius:16px;border:1px solid #ffffff33;background:#00000033;color:#fff;font-size:17px;font-weight:700}
+.coach-rest-actions .skip{grid-column:1/-1;background:#fff;color:#0a1d1b;border:0;min-height:64px}
+
+/* Tapis: il colore dice la fase anche con la coda dell'occhio */
+.coach-run{transition:background .4s}
+.coach-run .coach-run-phase{font-size:clamp(48px,15vw,84px);font-weight:900;letter-spacing:-.05em;line-height:1;margin-top:6px}
+.coach-run.run .coach-run-phase{color:var(--mint)}
+.coach-run.walk .coach-run-phase{color:var(--blue)}
+.coach-run-label{color:var(--muted);font-size:15px}
+.coach-run-num{font-size:clamp(96px,32vw,170px);font-weight:800;letter-spacing:-.07em;line-height:1;font-variant-numeric:tabular-nums;text-align:center}
+.coach-run .coach-run-num{text-align:left}
+.coach-run-bar{height:8px;background:var(--surface2);border-radius:4px;overflow:hidden}
+.coach-run-bar span{display:block;height:100%;background:var(--mint)}
+.coach-run-next{color:var(--muted);font-size:14px}
+.coach-phases{list-style:none;margin:0;padding:0;display:flex;gap:2px;height:22px}
+.coach-phases li{border-radius:3px;opacity:.4}
+.coach-phases li.run{background:var(--mint)}
+.coach-phases li.walk{background:var(--blue)}
+.coach-phases li.past{opacity:.15}
+.coach-phases li.now{opacity:1;outline:2px solid var(--text);outline-offset:1px}
+
+/* Riepilogo */
+.coach-recap{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.coach-recap li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
+.coach-recap li span{color:var(--mint);text-align:right;font-variant-numeric:tabular-nums}
+.coach-recap li.empty span{color:var(--dim)}
+.coach-pr{display:flex;flex-direction:column;gap:4px;padding:14px;border-radius:14px;background:#33291a;border:1px solid #665231;color:#ffe3b0}
+.coach-pr b{color:var(--amber)}
+
+.coach-toast{position:absolute;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:9;background:var(--text);color:var(--bg);padding:12px 16px;border-radius:12px;font-weight:650;font-size:14px}
+.coach-resume{position:fixed;left:12px;right:12px;bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:120;display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 14px;border-radius:14px;background:#1c3a36;border:1px solid #38786c;color:#e0f5ef;font-size:13px;box-shadow:0 12px 40px #0008}
+.coach-resume span{flex:1;min-width:180px}
+@media(min-width:821px){.coach-resume{left:auto;right:24px;bottom:24px;max-width:460px}}
+
+/* Pulsante d'ingresso nella dashboard */
+.btn-coach{background:var(--text);color:var(--bg)}
+
+.coach button:focus-visible,.coach input:focus-visible,.coach textarea:focus-visible,.coach summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.coach-rest-fill,.coach-run{transition:none}.coach-go:active{transform:none}}
+@media(min-width:900px){.coach-steppers{grid-template-columns:1fr 1fr}}
