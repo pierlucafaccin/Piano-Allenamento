@@ -32,32 +32,156 @@
       "db-bench": {
         "sets": "3 × 8",
         "load": "20 kg per manubrio",
-        "note": ""
+        "note": "",
+        "performedSets": [
+          {
+            "reps": "8",
+            "kg": "20",
+            "rpe": ""
+          },
+          {
+            "reps": "8",
+            "kg": "20",
+            "rpe": ""
+          },
+          {
+            "reps": "8",
+            "kg": "20",
+            "rpe": ""
+          }
+        ],
+        "loadUnit": "per_manubrio",
+        "repUnit": "ripetizioni"
       },
       "cable-row": {
         "sets": "4 × 12",
         "load": "10 kg",
-        "note": ""
+        "note": "",
+        "performedSets": [
+          {
+            "reps": "12",
+            "kg": "10",
+            "rpe": ""
+          },
+          {
+            "reps": "12",
+            "kg": "10",
+            "rpe": ""
+          },
+          {
+            "reps": "12",
+            "kg": "10",
+            "rpe": ""
+          },
+          {
+            "reps": "12",
+            "kg": "10",
+            "rpe": ""
+          }
+        ],
+        "loadUnit": "macchina",
+        "repUnit": "ripetizioni"
       },
       "cable-fly": {
         "sets": "3 × 10",
         "load": "12 kg per lato",
-        "note": ""
+        "note": "",
+        "performedSets": [
+          {
+            "reps": "10",
+            "kg": "12",
+            "rpe": ""
+          },
+          {
+            "reps": "10",
+            "kg": "12",
+            "rpe": ""
+          },
+          {
+            "reps": "10",
+            "kg": "12",
+            "rpe": ""
+          }
+        ],
+        "loadUnit": "per_lato",
+        "repUnit": "ripetizioni"
       },
       "shoulder-multipower": {
         "sets": "2 × 8 + 2 × 6",
         "load": "10 kg per lato",
-        "note": "Lento avanti al multipower"
+        "note": "Lento avanti al multipower",
+        "performedSets": [
+          {
+            "reps": "8",
+            "kg": "10",
+            "rpe": ""
+          },
+          {
+            "reps": "8",
+            "kg": "10",
+            "rpe": ""
+          },
+          {
+            "reps": "6",
+            "kg": "10",
+            "rpe": ""
+          },
+          {
+            "reps": "6",
+            "kg": "10",
+            "rpe": ""
+          }
+        ],
+        "loadUnit": "per_lato",
+        "repUnit": "ripetizioni"
       },
       "face-pull": {
         "sets": "3 × 10",
         "load": "15 kg",
-        "note": ""
+        "note": "",
+        "performedSets": [
+          {
+            "reps": "10",
+            "kg": "15",
+            "rpe": ""
+          },
+          {
+            "reps": "10",
+            "kg": "15",
+            "rpe": ""
+          },
+          {
+            "reps": "10",
+            "kg": "15",
+            "rpe": ""
+          }
+        ],
+        "loadUnit": "macchina",
+        "repUnit": "ripetizioni"
       },
       "reverse-fly": {
         "sets": "3 × 10",
         "load": "5 kg per manubrio",
-        "note": ""
+        "note": "",
+        "performedSets": [
+          {
+            "reps": "10",
+            "kg": "5",
+            "rpe": ""
+          },
+          {
+            "reps": "10",
+            "kg": "5",
+            "rpe": ""
+          },
+          {
+            "reps": "10",
+            "kg": "5",
+            "rpe": ""
+          }
+        ],
+        "loadUnit": "per_manubrio",
+        "repUnit": "ripetizioni"
       }
     }
   },
@@ -68,12 +192,50 @@
       "standing-db-curl": {
         "sets": "3 × 10",
         "load": "10 kg per manubrio",
-        "note": "Serie e ripetizioni confermate dall'atleta"
+        "note": "Serie e ripetizioni confermate dall'atleta",
+        "performedSets": [
+          {
+            "reps": "10",
+            "kg": "10",
+            "rpe": ""
+          },
+          {
+            "reps": "10",
+            "kg": "10",
+            "rpe": ""
+          },
+          {
+            "reps": "10",
+            "kg": "10",
+            "rpe": ""
+          }
+        ],
+        "loadUnit": "per_manubrio",
+        "repUnit": "ripetizioni"
       },
       "french-press-db": {
         "sets": "3 × 10",
         "load": "7 kg per manubrio",
-        "note": "Serie e ripetizioni confermate dall'atleta"
+        "note": "Serie e ripetizioni confermate dall'atleta",
+        "performedSets": [
+          {
+            "reps": "10",
+            "kg": "7",
+            "rpe": ""
+          },
+          {
+            "reps": "10",
+            "kg": "7",
+            "rpe": ""
+          },
+          {
+            "reps": "10",
+            "kg": "7",
+            "rpe": ""
+          }
+        ],
+        "loadUnit": "per_manubrio",
+        "repUnit": "ripetizioni"
       }
     }
   },
@@ -84,12 +246,50 @@
       "static-lunge-db": {
         "sets": "3 × 8 per lato",
         "load": "10 kg per manubrio",
-        "note": "Due manubri da 10 kg; registrato il 12/11/2026"
+        "note": "Due manubri da 10 kg; registrato il 12/11/2026",
+        "performedSets": [
+          {
+            "reps": "8",
+            "kg": "10",
+            "rpe": ""
+          },
+          {
+            "reps": "8",
+            "kg": "10",
+            "rpe": ""
+          },
+          {
+            "reps": "8",
+            "kg": "10",
+            "rpe": ""
+          }
+        ],
+        "loadUnit": "per_manubrio",
+        "repUnit": "ripetizioni"
       },
       "lying-leg-curl-single": {
         "sets": "3 × 10",
         "load": "10 kg (macchina)",
-        "note": "Leg curl sdraiato monolaterale; registrato il 12/11/2026"
+        "note": "Leg curl sdraiato monolaterale; registrato il 12/11/2026",
+        "performedSets": [
+          {
+            "reps": "10",
+            "kg": "10",
+            "rpe": ""
+          },
+          {
+            "reps": "10",
+            "kg": "10",
+            "rpe": ""
+          },
+          {
+            "reps": "10",
+            "kg": "10",
+            "rpe": ""
+          }
+        ],
+        "loadUnit": "macchina",
+        "repUnit": "ripetizioni"
       }
     }
   },

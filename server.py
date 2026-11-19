@@ -24,6 +24,7 @@ LOCK = threading.RLock()
 ALLOWED = {
     '/':'index.html', '/index.html':'index.html', '/style.css':'style.css',
     '/app.js':'app.js', '/training-plan.json':'training-plan.json',
+    '/progressi.js':'progressi.js', '/progressi.css':'progressi.css',
     '/favicon.svg':'favicon.svg', '/garmin/dashboard':'garmin/dashboard.html',
 }
 
@@ -178,9 +179,44 @@ class Handler(BaseHTTPRequestHandler):
             entries = entry.get('exercises',{})
             if not isinstance(entries,dict) or len(entries)>40:
                 return self.send_data(400,{'error':'Esercizi non validi'})
+            # structured diary v2: accept individual series while keeping legacy text fields.
             for item in entries.values():
-                if not isinstance(item,dict) or any(not isinstance(v,str) or len(v)>2000 for v in item.values()):
+                if not isinstance(item,dict) or len(item)>20:
                     return self.send_data(400,{'error':'Dettagli non validi'})
+                for field,value in item.items():
+                    if field == 'performedSets':
+                        if not isinstance(value,list) or len(value)>12:
+                            return self.send_data(400,{'error':'Numero serie non valido'})
+                        for row in value:
+                            if not isinstance(row,dict) or any(key not in ('reps','kg','rpe') for key in row):
+                                return self.send_data(400,{'error':'Serie non valide'})
+                            for key,content in row.items():
+                                if not isinstance(content,str) or len(content)>32:
+                                    return self.send_data(400,{'error':'Valore serie non valido'})
+                                if content:
+                                    try:
+                                        n=float(content)
+                                        if not (0<=n<=(10 if key=='rpe' else 2000)):
+                                            raise ValueError()
+                                    except ValueError:
+                                        return self.send_data(400,{'error':'Valore serie non numerico'})
+                    elif not isinstance(value,str) or len(value)>2000:
+                        return self.send_data(400,{'error':'Dettagli non validi'})
+            run = entry.get('run')
+            if run is not None:
+                if not isinstance(run,dict) or len(run)>15 or any(not isinstance(v,str) or len(v)>1000 for v in run.values()):
+                    return self.send_data(400,{'error':'Corsa non valida'})
+                if run.get('status','') not in ('','done','partial','skipped'):
+                    return self.send_data(400,{'error':'Stato corsa non valido'})
+            walk_km = entry.get('walkKm','')
+            if walk_km not in ('',None):
+                try:
+                    if not (0<=float(walk_km)<=100):
+                        raise ValueError()
+                except (TypeError,ValueError):
+                    return self.send_data(400,{'error':'Distanza camminata non valida'})
+            if not isinstance(entry.get('mobilityDone',False),bool):
+                return self.send_data(400,{'error':'Mobilita non valida'})
             if not isinstance(entry.get('notes',''),str) or len(entry.get('notes',''))>10000:
                 return self.send_data(400,{'error':'Note troppo lunghe'})
             for name in ('rpe', 'painAfter', 'minutes'):
@@ -197,7 +233,10 @@ class Handler(BaseHTTPRequestHandler):
                 log[d] = {'status':entry['status'], 'notes':entry.get('notes',''),
                           'rpe':entry.get('rpe',''),'painAfter':entry.get('painAfter',''),
                           'minutes':entry.get('minutes',''),
-                          'exercises':entries,'updatedAt':dt.datetime.now().isoformat(timespec='seconds')}
+                          'exercises':entries, 'run':entry.get('run'),
+                          'walkKm':entry.get('walkKm',''),
+                          'mobilityDone':entry.get('mobilityDone',False),
+                          'updatedAt':dt.datetime.now().isoformat(timespec='seconds')}
                 atomic_json(LOG_FILE, log)
             # Rebuild the detailed Garmin dashboard after manual log edits so
             # its rehab/calendar widgets always reflect confirmed sessions.

@@ -139,9 +139,10 @@
   }
   function trainingItem(e,date,w) {
     const logged=LOGS[date]?.exercises?.[e.id];
+    const actualText=logged ? window.TrainingTracker?.formatRecord(logged) || [logged.sets,logged.load].filter(Boolean).join(' · ') : '';
     const blocked=e.notBeforeWeek && w<e.notBeforeWeek;
     return `<tr><td>${esc(e.name)}${blocked?'<br><span class="badge-inline">DALLA SETTIMANA '+e.notBeforeWeek+'</span>':''}<small>${esc(e.notes)}</small>
-      ${logged?`<div class="actual">ANNOTATO: ${esc(logged.sets||'')} ${logged.load?`· ${esc(logged.load)}`:''}</div>`:''}</td>
+      ${logged?`<div class="actual">ANNOTATO: ${esc(actualText)}</div>`:''}</td>
       <td>${esc(e.sets)}</td><td>${esc(e.rest||'—')}</td></tr>`;
   }
   function listPanel(title,arr) {return arr?.length?`<article class="panel"><h3>${esc(title)}</h3><ul class="check-list">${arr.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></article>`:'';}
@@ -205,6 +206,11 @@
     $('run-table').innerHTML=`<div class="run-table"><table><thead><tr><th>Sett.</th><th>Martedì</th><th>Venerdì</th><th>Min corsa (M/V)</th><th>Totale (M/V)</th></tr></thead><tbody>${P.runProgression.map((r,i)=>`<tr class="${wi===i+1?'current':''}"><td><strong>${i+1}</strong></td><td>${esc(runText(i,'tue'))}</td><td>${esc(runText(i,'fri'))}</td><td>${runMinutes(i)} / ${runMinutes(i,'fri')} min</td><td>${runTotal(i)} / ${runTotal(i,'fri')} min</td></tr>`).join('')}</tbody></table></div><p class="subtle small">I due giorni hanno progressioni differenti. Durate comprensive di 5 minuti di camminata iniziale e finale, più le pause previste.</p>`;
   }
   function openDrawer(date) {
+    if (window.TrainingTracker?.selectDate) {
+      navigate('strength');
+      window.TrainingTracker.selectDate(date);
+      return;
+    }
     const idx=weekNumber(date)-1, dow=(parse(date).getDay()+6)%7;
     const k=KEYS[dow],d=getDay(k,idx),e=(d.exercises||[]);
     $('drawer-date').textContent=DOW[dow]+' · '+niceDate(date);
@@ -296,7 +302,14 @@
     }catch(e){live=false;SYNC={status:'published'};
       try{const r=await fetch('./garmin/summary.json',{cache:'no-store'});G=r.ok?await r.json():{available:false};}catch(_){G={available:false};}
       try{const r=await fetch('./training-log-public.json',{cache:'no-store'});LOGS=r.ok?await r.json():{};}catch(_){LOGS={};}
-      LOGS={...LOGS,...localSaved()};
+      // Preserve public structured series even if an older local snapshot has text-only entries.
+      for(const [date,local] of Object.entries(localSaved())){
+        const remote=LOGS[date]||{},items={...(remote.exercises||{})};
+        for(const [id,value] of Object.entries(local.exercises||{})){
+          items[id]={...(items[id]||{}),...value};
+        }
+        LOGS[date]={...remote,...local,exercises:items};
+      }
     }
     const start=Math.max(0,phaseWeek()-1);week=Math.min(start,Math.max(0,Math.floor(countDays(P.startDate,P.race.date)/7)));
     $('top-date').textContent=new Intl.DateTimeFormat('it-IT',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(today);
@@ -321,6 +334,39 @@
     $('top-sync').onclick=startSync;$('garmin-sync').onclick=startSync;
     $('drawer-close').onclick=closeDrawer;$('drawer-backdrop').onclick=closeDrawer;
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
+    window.TrainingTracker?.mount({
+      getPlan: () => P,
+      getLogs: () => LOGS,
+      save: async (date, entry) => {
+        if (!live) {
+          LOGS[date]=entry;
+          storeLocal();
+          renderAll();
+          flash('Seduta salvata nel browser. Usa Esporta per conservarne una copia.');
+          return;
+        }
+        const r=await fetch('/api/logs',{method:'POST',headers:{'Content-Type':'application/json','X-Local-Dashboard':'1'},body:JSON.stringify({date,entry})});
+        let result={};try{result=await r.json();}catch(_){}
+        if(!r.ok)throw new Error(result.error||'Errore durante il salvataggio');
+        LOGS[date]=entry;
+        renderAll();
+        flash('Allenamento salvato nel diario locale.');
+      },
+      importEntries: async entries => {
+        if (!live) {
+          Object.assign(LOGS, entries);
+          storeLocal();
+          renderAll();
+          return;
+        }
+        for (const [date,entry] of Object.entries(entries)) {
+          const r=await fetch('/api/logs',{method:'POST',headers:{'Content-Type':'application/json','X-Local-Dashboard':'1'},body:JSON.stringify({date,entry})});
+          if(!r.ok)throw new Error('Importazione interrotta alla data '+date);
+          LOGS[date]=entry;
+        }
+        renderAll();
+      }
+    });
     renderAll();
     const anchor=location.hash.slice(1);if(['overview','week','strength','garmin','roadmap'].includes(anchor))navigate(anchor);
     refreshTicker=setInterval(loadStatus,12000);

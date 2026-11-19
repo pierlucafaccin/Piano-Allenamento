@@ -10,7 +10,9 @@
   <title>Copenhagen 21K · Training Hub</title>
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./responsive-fixes.css?v=20261112">
+  <script src="./progressi.js?v=2" defer></script>
   <script src="./app.js" defer></script>
+  <link rel="stylesheet" href="./progressi.css?v=2">
 </head>
 <body>
 <div class="shell">
@@ -72,8 +74,15 @@
     </section>
     <section class="page" id="page-strength">
       <div class="page-heading"><div><div class="eyebrow">SCHEDA DI GIOVANNI B.</div><h1>Esercizi, serie e carichi</h1><p>Prescrizioni del trainer e registro dei risultati. Le annotazioni non confermate restano esplicitamente tali.</p></div></div>
-      <div class="day-tabs" id="strength-tabs"></div>
-      <div id="strength-detail"></div>
+      <div class="training-view-switch" role="group" aria-label="Vista allenamenti">
+        <button type="button" class="active" data-training-view="tracker" aria-pressed="true">Diario e progressi</button>
+        <button type="button" data-training-view="trainer" aria-pressed="false">Scheda istruttore</button>
+      </div>
+      <div id="tracker-root"></div>
+      <div id="trainer-plan" hidden>
+        <div class="day-tabs" id="strength-tabs"></div>
+        <div id="strength-detail"></div>
+      </div>
     </section>
     <section class="page" id="page-garmin">
       <div class="page-heading"><div><div class="eyebrow">DATI DALL'OROLOGIO</div><h1>Garmin Connect · Analytics</h1><p>Attività, recupero, HRV, sonno e trend elaborati dal motore Python del tuo progetto originale.</p></div><button type="button" class="btn btn-mint" id="garmin-sync">Ricarica dati pubblicati</button></div>
