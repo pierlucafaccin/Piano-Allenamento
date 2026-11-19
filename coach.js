@@ -187,7 +187,9 @@
     const steps = [{type: 'checkin', key: 'checkin', title: 'Check-in'}];
     if (d.warmup?.length) steps.push({type: 'list', key: 'warmup', title: 'Riscaldamento', items: d.warmup});
     const ex = (d.exercises || []).filter(e => !(e.notBeforeWeek && w < e.notBeforeWeek)).map(e => ({type: 'exercise', key: 'ex:' + e.id, id: e.id, title: e.name}));
-    const rehab = d.rehab?.length ? [{type: 'list', key: 'rehab', title: 'Riabilitazione e stabilità', items: d.rehab}] : [];
+    // Mercoledì e venerdì la scheda dice "come lunedì": in palestra serve la lista vera, non il rimando.
+    const rehabItems = d.rehab?.length === 1 && /luned/i.test(d.rehab[0]) && plan.schedule?.mon?.rehab?.length ? plan.schedule.mon.rehab : d.rehab;
+    const rehab = rehabItems?.length ? [{type: 'list', key: 'rehab', title: 'Riabilitazione e stabilità', items: rehabItems}] : [];
     const run = (day === 'tue' || day === 'fri') && w >= 1 && w <= 8 ? [{type: 'run', key: 'run', title: 'Tapis roulant'}] : [];
     if (day === 'fri') steps.push(...run, ...ex, ...rehab);
     else steps.push(...rehab, ...ex, ...run);
@@ -345,13 +347,23 @@
     </section>`;
   }
 
+  /* "…Progressione: settimane 1–2 versione base; settimane 3–4 con lanci…" → variante della settimana corrente */
+  function splitProgression(text, w) {
+    const [base, prog] = String(text).split(/\.\s*Progressione:\s*/i);
+    if (!prog) return {base: text, now: ''};
+    for (const part of prog.split(';')) {
+      const m = part.trim().match(/^sett(?:imane|\.)?\s*(\d+)(?:\s*[–-]\s*(\d+))?\s+(.+)$/i);
+      if (m && w >= +m[1] && w <= +(m[2] || m[1])) return {base, now: m[3]};
+    }
+    return {base, now: ''};
+  }
   function renderList(st) {
     const c = S.checks[st.key] || [];
     const done = st.items.filter((_, i) => c[i]).length;
     return `<section class="coach-card">
       <h1 class="coach-h">${ESC(st.title)}</h1>
       <p class="coach-sub">${done} di ${st.items.length} · tocca una voce quando l'hai fatta</p>
-      <ul class="coach-checks">${st.items.map((it, i) => `<li><button type="button" data-check="${ESC(st.key)}" data-i="${i}" class="${c[i] ? 'on' : ''}" aria-pressed="${!!c[i]}"><span class="coach-tick" aria-hidden="true"></span><span>${ESC(it)}</span></button></li>`).join('')}</ul>
+      <ul class="coach-checks">${st.items.map((it, i) => `<li><button type="button" data-check="${ESC(st.key)}" data-i="${i}" class="${c[i] ? 'on' : ''}" aria-pressed="${!!c[i]}"><span class="coach-tick" aria-hidden="true"></span><span>${(sp => `${ESC(sp.base)}${sp.now ? `<small class="coach-variant">Settimana ${clampW()}: ${ESC(sp.now)}</small>` : ''}`)(splitProgression(it, clampW()))}</span></button></li>`).join('')}</ul>
       <div class="coach-row"><button type="button" class="btn btn-outline btn-sm" data-act="timer60">Timer 60 s</button><button type="button" class="btn btn-outline btn-sm" data-act="timer30">Timer 30 s</button></div>
       <button type="button" class="coach-go" data-act="next">${done === st.items.length ? 'Avanti' : 'Prosegui comunque'}</button>
       ${navFooter()}

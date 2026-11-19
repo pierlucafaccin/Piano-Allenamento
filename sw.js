@@ -1,8 +1,8 @@
 /* Copenhagen 21K — rete prima, copia di riserva per la palestra senza campo.
  * Ogni risposta riuscita aggiorna la cache: online vedi sempre l'ultima versione,
  * offline l'app, il piano e la modalità allenamento continuano a funzionare. */
-const CACHE = 'piano-allenamento-cph-2027-v2';
-const SHELL = ['./', './index.html', './style.css', './responsive-fixes.css', './progressi.css', './coach.css',
+const CACHE = 'piano-allenamento-cph-vlc-2027-v3';
+const SHELL = ['./', './index.html', './style.css', './responsive-fixes.css', './progressi.css', './coach.css', './races.css',
   './app.js', './progressi.js', './coach.js', './training-plan.json', './manifest.webmanifest', './favicon.svg'];
 
 self.addEventListener('install', event => event.waitUntil((async () => {

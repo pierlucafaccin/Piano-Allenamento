@@ -4,24 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b111a">
-  <meta name="description" content="Copenhagen 21K · Il piano reale di palestra, il ritorno alla corsa e i dati Garmin in un'unica dashboard online.">
+  <meta name="description" content="SuperHalfs 2027 · Copenaghen e Valencia. Il piano reale di palestra, il ritorno alla corsa e i dati Garmin in un'unica dashboard online.">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="./manifest.webmanifest">
-  <title>Copenhagen 21K · Training Hub</title>
+  <title>Copenaghen + Valencia 21K · Training Hub</title>
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./responsive-fixes.css?v=20261112">
   <script src="./progressi.js?v=3" defer></script>
-  <script src="./coach.js?v=1" defer></script>
-  <script src="./app.js" defer></script>
+  <script src="./coach.js?v=2" defer></script>
+  <script src="./app.js?v=2" defer></script>
   <link rel="stylesheet" href="./progressi.css?v=2">
-  <link rel="stylesheet" href="./coach.css?v=1">
+  <link rel="stylesheet" href="./coach.css?v=2">
+  <link rel="stylesheet" href="./races.css?v=1">
 </head>
 <body>
 <div class="shell">
   <aside class="sidebar">
-    <a class="brand" href="#overview" aria-label="Copenhagen 21K, panoramica">
+    <a class="brand" href="#overview" aria-label="SuperHalfs 2027, panoramica">
       <span class="brand-mark">C<span>21</span></span>
-      <span><b>COPENHAGEN</b><small>TRAINING SYSTEM</small></span>
+      <span><b>SUPERHALFS 2027</b><small>CPH · VLC</small></span>
     </a>
     <div class="sidebar-head">IL TUO PERCORSO</div>
     <nav class="primary-nav" aria-label="Navigazione principale">
@@ -33,7 +34,7 @@
     </nav>
     <div class="sidebar-bottom">
       <div class="sidebar-status"><span class="pulse"></span><span><strong>Preparazione in corso</strong><small>Rientro progressivo alla corsa</small></span></div>
-      <div class="sidebar-footer">SUPERHALFS · COPENHAGEN 2027</div>
+      <div class="sidebar-footer">COPENAGHEN 19.09 · VALENCIA 24.10</div>
     </div>
   </aside>
   <main class="content">
@@ -45,12 +46,12 @@
     <section class="page on" id="page-overview">
       <div class="hero">
         <div class="hero-inner">
-          <div class="eyebrow mint">SUPERHALFS 2027 · 19 SETTEMBRE</div>
-          <h1>Ogni allenamento<br><em>porta a Copenaghen.</em></h1>
-          <p>La tua preparazione reale, non un piano generico. Prima il recupero della caviglia, poi la costruzione verso i 21,097 km.</p>
-          <div class="hero-footer"><span class="hero-race">COPENHAGEN HALF MARATHON</span><span class="hero-separator"></span><span class="hero-location">19.09.2027</span></div>
+          <div class="eyebrow mint">SUPERHALFS 2027</div>
+          <h1>Due mezze,<br><em>un solo percorso.</em></h1>
+          <p>La tua preparazione reale, non un piano generico. Prima il recupero della caviglia, poi Copenaghen il 19 settembre e Valencia il 24 ottobre 2027.</p>
+          <div class="hero-footer"><span class="hero-race" id="hero-race">COPENHAGEN HALF MARATHON</span><span class="hero-separator"></span><span class="hero-location" id="hero-race-date">19.09.2027</span></div>
         </div>
-        <div class="hero-count"><span class="eyebrow">ALLA LINEA DI PARTENZA</span><strong class="big-num" id="days-left">—</strong><span>giorni</span><div class="race-mark">21<span>,1</span><small>KM</small></div></div>
+        <div class="hero-count"><span class="eyebrow" id="hero-count-label">ALLA LINEA DI PARTENZA</span><strong class="big-num" id="days-left">—</strong><span>giorni</span><small class="hero-next" id="hero-next"></small><div class="race-mark">21<span>,1</span><small>KM</small></div></div>
         <div class="hero-grid"></div>
       </div>
       <div class="grid stats-4" id="stat-cards"></div>
@@ -94,13 +95,13 @@
       <div class="notice tip"><strong>Garmin pubblico:</strong> grafici e metriche aggiornati da GitHub Actions. Dati personali visibili a chiunque abbia accesso al sito; la chiave API rimane segreta.</div>
     </section>
     <section class="page" id="page-roadmap">
-      <div class="page-heading"><div><div class="eyebrow">SUPERHALFS / COPENHAGEN 2027</div><h1>Dal recupero alla mezza</h1><p>Una direzione di lungo periodo, con le fasi successive intenzionalmente non prescritte finché non ci saranno le nuove schede.</p></div></div>
-      <div class="grid roadmap-top"><article class="panel"><div class="eyebrow">OBIETTIVO</div><div class="roadmap-race">21,097<span> km</span></div><div class="subtle">Domenica 19 settembre 2027</div><p class="muted-p">La prima tappa del percorso SuperHalfs: Copenaghen. La priorità attuale è tornare a correre con continuità e senza forzare i carichi.</p></article><article class="panel"><div class="eyebrow">FASE CORRENTE</div><div id="current-phase" class="phase-head">Ritorno progressivo</div><p class="muted-p">Tapis il martedì e il venerdì; palestra e lavoro di stabilità secondo prescrizione. Al termine delle otto settimane si rivaluterà il programma.</p><div class="phase-line"><div id="phase-progress"></div></div><div id="phase-caption" class="subtle small"></div></article></div>
+      <div class="page-heading"><div><div class="eyebrow">SUPERHALFS 2027 · COPENAGHEN E VALENCIA</div><h1>Dal recupero alle due mezze</h1><p>Una direzione di lungo periodo, con le fasi successive intenzionalmente non prescritte finché non ci saranno le nuove schede.</p></div></div>
+      <div class="grid roadmap-top"><article class="panel"><div class="eyebrow">OBIETTIVI</div><div id="roadmap-races" class="race-list"></div></article><article class="panel"><div class="eyebrow">FASE CORRENTE</div><div id="current-phase" class="phase-head">Ritorno progressivo</div><p class="muted-p">Tapis il martedì e il venerdì; palestra e lavoro di stabilità secondo prescrizione. Al termine delle otto settimane si rivaluterà il programma.</p><div class="phase-line"><div id="phase-progress"></div></div><div id="phase-caption" class="subtle small"></div></article></div>
       <div class="panel"><div class="section-head"><div><div class="eyebrow">TIMELINE</div><h2>Le fasi del percorso</h2></div></div><div id="phases-list" class="phase-list"></div></div>
       <div class="panel"><div class="section-head"><div><div class="eyebrow">TAPIS · MARTEDÌ E VENERDÌ</div><h2>Progressione di recupero (8 settimane)</h2></div></div><div id="run-table"></div></div>
-      <div class="notice tip"><strong>Nota importante.</strong> Nessun chilometraggio, ritmo, tempo obiettivo o lavoro di qualità futuro viene dedotto automaticamente da questa progressione. La preparazione specifica per Copenaghen sarà definita dopo il via libera del professionista che segue la caviglia.</div>
+      <div class="notice tip"><strong>Nota importante.</strong> Nessun chilometraggio, ritmo, tempo obiettivo o lavoro di qualità futuro viene dedotto automaticamente da questa progressione. La preparazione specifica per Copenaghen e Valencia sarà definita dopo il via libera del professionista che segue la caviglia.</div>
     </section>
-    <footer class="footer">COPENHAGEN 21K · TRAINING HUB <span>Dati Garmin pubblici · Credenziali riservate · Il piano non sostituisce le indicazioni del trainer</span></footer>
+    <footer class="footer">SUPERHALFS 2027 · COPENAGHEN + VALENCIA <span>Dati Garmin pubblici · Credenziali riservate · Il piano non sostituisce le indicazioni del trainer</span></footer>
   </main>
 </div>
 <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>

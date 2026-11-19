@@ -1,0 +1,10 @@
+/* Due gare: Copenaghen e Valencia */
+.race-list{display:flex;flex-direction:column}
+.race-item{padding:14px 0;border-bottom:1px solid var(--line)}
+.race-item:first-child{padding-top:6px}
+.race-item:last-child{border-bottom:0;padding-bottom:0}
+.race-item .roadmap-race{font-size:44px;margin-top:6px}
+.race-item .muted-p{margin:8px 0 0}
+.race-item.past{opacity:.55}
+.hero-next{display:block;margin-top:6px;font-size:11px;color:#b1cbd7;text-align:center}
+@media(max-width:530px){.hero-next{text-align:right;font-size:10px}}

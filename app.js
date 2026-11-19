@@ -58,7 +58,11 @@
   function statusOf(date) {return LOGS[date]?.status||'none';}
   function stateLabel(date) {let t=statusOf(date);return t==='done'?'COMPLETATO':t==='partial'?'ANNOTAZIONI':t==='skipped'?'SALTATO':'DA REGISTRARE';}
   function statusTag(date) {let t=statusOf(date);return t==='done'?'<span class="tag tag-mint">COMPLETATO</span>':t==='partial'?'<span class="tag tag-amber">ANNOTATO</span>':t==='skipped'?'<span class="tag tag-red">SALTATO</span>':'<span class="tag">NON REGISTRATO</span>';}
-  function isAfterRace() {return countDays(TODAY,P.race.date)<0;}
+  const races = () => (P.races && P.races.length ? P.races : [P.race]).slice().sort((a,b)=>a.date<b.date?-1:1);
+  const lastRace = () => races()[races().length-1];
+  const nextRace = () => races().find(r=>r.date>=TODAY) || lastRace();
+  const dotDate = s => s.split('-').reverse().join('.');
+  function isAfterRace() {return countDays(TODAY,lastRace().date)<0;}
   const btn = (txt,fnId,klass='btn btn-outline btn-sm')=>`<button class="${klass}" type="button" ${fnId}>${txt}</button>`;
   function navigate(page) {
     if(!$('page-'+page))return;
@@ -75,7 +79,11 @@
     return `<article class="metric"><div class="label">${esc(label)}</div><div class="num ${color}">${esc(value)}</div><div class="foot">${esc(foot)}</div></article>`;
   }
   function renderOverview() {
-    const days=Math.max(0,countDays(TODAY,P.race.date));$('days-left').textContent=String(days);
+    const nr=nextRace(), days=Math.max(0,countDays(TODAY,nr.date));$('days-left').textContent=String(days);
+    $('hero-race').textContent=nr.name.toUpperCase();$('hero-race-date').textContent=dotDate(nr.date);
+    $('hero-count-label').textContent=races().length>1?`ALLA PARTENZA DI ${nr.city.toUpperCase()}`:'ALLA LINEA DI PARTENZA';
+    const others=races().filter(r=>r!==nr&&r.date>=TODAY);
+    $('hero-next').textContent=others.length?others.map(r=>`${r.city} tra ${countDays(TODAY,r.date)} giorni`).join(' · '):'';
     const wi=phaseWeek(), idx=wi-1;
     const complete=Object.entries(LOGS).filter(([k,v])=>weekNumber(k)===wi&&v.status==='done').length;
     const runKm=G?.weekly?.runKm||0;
@@ -123,7 +131,7 @@
     $('week-label').textContent=trainingWeek(week)?`Settimana ${wi} / 8 · Recupero`:`Settimana ${wi} · Da pianificare`;
     $('week-range').textContent=`${datelabel(w0)} — ${datelabel(w6)}`;
     $('week-prev').disabled=week<=0;
-    $('week-next').disabled=countDays(w0,P.race.date)<0;
+    $('week-next').disabled=countDays(w0,lastRace().date)<0;
     $('week-note').innerHTML=trainingWeek(week)
      ? `<strong>Settimana ${wi}.</strong> Martedì: ${esc(runText(week,'tue'))}. Venerdì: ${esc(runText(week,'fri'))}. Gli altri giorni seguono solo le schede disponibili.`
      : '<strong>Programma futuro non ancora definito.</strong> Non vengono riproposti automaticamente i carichi del primo blocco, né prescritte corse aggiuntive.';
@@ -196,6 +204,8 @@
     }
   }
   function renderRoadmap() {
+    $('roadmap-races').innerHTML=races().map((r,i)=>{const d=countDays(TODAY,r.date);const long=new Intl.DateTimeFormat('it-IT',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(parse(r.date));
+      return `<div class="race-item ${d<0?'past':''}"><div class="eyebrow">${i===0?'PRIMA GARA':'SECONDA GARA'} · ${esc(r.city.toUpperCase())}</div><div class="roadmap-race">21,097<span> km</span></div><div class="subtle">${esc(long.charAt(0).toUpperCase()+long.slice(1))}${d>=0?` · tra ${d} giorni`:' · corsa'}</div><p class="muted-p">${esc(r.target||'')}</p></div>`;}).join('');
     const wi=phaseWeek(),progress=Math.max(0,Math.min(1,(wi-1)/8));
     $('current-phase').textContent=wi<=8?'Riabilitazione e ritorno alla corsa':'Programma successivo da definire';
     $('phase-progress').style.width=(progress*100)+'%';
@@ -311,7 +321,7 @@
         LOGS[date]={...remote,...local,exercises:items};
       }
     }
-    const start=Math.max(0,phaseWeek()-1);week=Math.min(start,Math.max(0,Math.floor(countDays(P.startDate,P.race.date)/7)));
+    const start=Math.max(0,phaseWeek()-1);week=Math.min(start,Math.max(0,Math.floor(countDays(P.startDate,lastRace().date)/7)));
     $('top-date').textContent=new Intl.DateTimeFormat('it-IT',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(today);
     document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.page)));
     document.body.addEventListener('click',e=>{
@@ -321,7 +331,7 @@
       const tab=e.target.closest('[data-strength]');if(tab){strengthTab=tab.dataset.strength;renderStrength();return;}
     });
     $('week-prev').onclick=()=>{week=Math.max(0,week-1);renderWeek();};
-    $('week-next').onclick=()=>{week=Math.min(Math.floor(countDays(P.startDate,P.race.date)/7),week+1);renderWeek();};
+    $('week-next').onclick=()=>{week=Math.min(Math.floor(countDays(P.startDate,lastRace().date)/7),week+1);renderWeek();};
     $('week-now').onclick=()=>{week=Math.max(0,phaseWeek()-1);renderWeek();};
     $('backup-log').onclick=async()=>{
       if(!live){const blob=new Blob([JSON.stringify(LOGS,null,2)],{type:'application/json;charset=utf-8'});const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='piano-allenamento-diario-'+TODAY+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1500);return;}
