@@ -1,6 +1,6 @@
 {
   "available": true,
-  "lastPull": "2026-11-19T14:36:16",
+  "lastPull": "2026-11-20T14:14:18",
   "totalActivities": 126,
   "weekly": {
     "runs": 0,
@@ -61,18 +61,18 @@
   ],
   "metrics": {
     "rhr": {
-      "value": 59,
-      "date": "2026-11-19"
+      "value": 55,
+      "date": "2026-11-20"
     },
     "sleep": {
-      "value": 7.7,
-      "date": "2026-11-19"
+      "value": 7.2,
+      "date": "2026-11-20"
     },
     "hrv": {
-      "value": 47,
-      "date": "2026-11-19"
+      "value": 57,
+      "date": "2026-11-20"
     }
   },
   "dashboardBuilt": true,
-  "publishedAt": "2026-11-19T14:36:16+00:00"
+  "publishedAt": "2026-11-20T14:14:18+00:00"
 }
