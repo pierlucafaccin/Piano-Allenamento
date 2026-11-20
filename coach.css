@@ -146,3 +146,10 @@ body.coach-open{overflow:hidden}
 .coach button:focus-visible,.coach input:focus-visible,.coach textarea:focus-visible,.coach summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){.coach-rest-fill,.coach-run{transition:none}.coach-go:active{transform:none}}
 @media(min-width:900px){.coach-steppers{grid-template-columns:1fr 1fr}}
+
+/* iPhone: niente zoom con il doppio tocco. "manipulation" lascia attivo il pinch-zoom
+ * ma toglie il doppio tocco e il ritardo di 300 ms, così i tocchi rapidi su +/− contano tutti. */
+html{touch-action:manipulation}
+.coach,.coach *,.coach-resume,.coach-resume *{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.coach button,.coach-rest,.coach-hold,.coach-run-num,.coach-setno{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.coach-stepper input{-webkit-user-select:text;user-select:text}
